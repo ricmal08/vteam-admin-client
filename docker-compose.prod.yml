@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  admin-client:
+
+    image: rmalm01/vteam-admin-client:latest
+
+    container_name: vteam-admin-client-prod
+    ports:
+      - "3001:80"
