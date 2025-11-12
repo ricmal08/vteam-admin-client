@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Heading, VStack } from '@chakra-ui/react';
+//import { Box, Heading, VStack } from '@chakra-ui/react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
@@ -7,8 +7,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 import Userinterface from './components/interface/userinterface.jsx';
-import Accounts from './views/accounts.jsx';
-import Units from './views/units.jsx';
+import Accounts from './views/Accounts/accounts.jsx';
+import Units from './views/Units/units.jsx';
 
 const API_URL = "http://localhost:5173"
 
