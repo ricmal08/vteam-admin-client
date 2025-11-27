@@ -10,7 +10,7 @@ function Userinterface() {
         <h3> Innehåll: </h3>
         <RouterLink className="nav-link" to="/">Översikt</RouterLink>
         <RouterLink className="nav-link" to="/overview">Användare</RouterLink>
-        
+        <RouterLink className="nav-link" to="/admins">Administratörer</RouterLink>
         <RouterLink className="nav-link" to="/units">Fordon</RouterLink>
       </nav>
       <main>
