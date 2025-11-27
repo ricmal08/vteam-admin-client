@@ -10,7 +10,7 @@ import './App.css'
 import Userinterface from './components/interface/userinterface.jsx';
 import Accounts from './views/Accounts/accounts.jsx';
 import Units from './views/Units/units.jsx';
-import Admins from './views/Admins/admins.jsx';
+//import Admins from './views/Admins/admins.jsx';
 
 //const API_URL = "http://localhost:5173"
 //const API_URL = "http://localhost:3000"
@@ -27,7 +27,7 @@ function App() {
           {/*Dashboard-komponent
           <Route index element={<Dashboard />} />*/}
 
-          <Route path="admins" element={<Admins  />} />
+          {/*<Route path="admins" element={<Admins  />} />*/}
 
           <Route path="overview" element={<Accounts/>} />
 
