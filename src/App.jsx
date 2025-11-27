@@ -9,6 +9,7 @@ import './App.css'
 import Userinterface from './components/interface/userinterface.jsx';
 import Accounts from './views/Accounts/accounts.jsx';
 import Units from './views/Units/units.jsx';
+//import Invoices from
 
 const API_URL = "http://localhost:5173"
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="overview" element={<Accounts apiUrl={API_URL} />} />
 
           <Route path="units" element={<Units apiUrl={API_URL} />} />
+          <Route path="invoices" element={<Invoices apiUrl={API_URL} />} />
 
         </Route>
       </Routes>
