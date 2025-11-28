@@ -5,33 +5,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { API_URL } from "../../config.js"
 
 import './units.css';
+function Units({ apiUrl }) {
 
-function Units() {
-
-  const [units, setUnits] = useState([]);
-    useEffect(() => {
-          const fetchUnits= async () => {
-
-
-            try {
-
-              const response = await fetch(`${API_URL}/api/bikes`);
-
-              if (!response.ok) {
-              throw new Error(`Något gick fel, status: ${response.status}. Mer info: ${errorData.message}`);
-            }
-
-            const data = await response.json();
-            setUnits(data);
-              // TODO: ordna eventuellt fler kontroller
-            } catch (err) {
-              console.error("Ett fel inträffade vid fetch:", err);
-
-            }
-        };
-        fetchUnits();
-    }, [])
-    return (
+     useEffect(() => {
+}, [apiUrl])
+ return (
 
 <div className="units-container">
 

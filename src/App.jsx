@@ -30,8 +30,8 @@ function App() {
 
           {/*<Route path="admins" element={<Admins  />} />*/}
 
-          <Route path="units" element={<Units apiUrl={API_URL} />} />
-          <Route path="invoices" element={<Invoices apiUrl={API_URL} />} />
+          <Route path="units" element={<Units/>} />
+          {/*<Route path="invoices" element={<Invoices apiUrl={API_URL} />} />*/}
           <Route path="overview" element={<Accounts/>} />
 
           <Route path="units" element={<Units  />} />
