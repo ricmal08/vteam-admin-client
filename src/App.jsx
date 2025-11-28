@@ -10,7 +10,6 @@ import './App.css'
 import Userinterface from './components/interface/userinterface.jsx';
 import Accounts from './views/Accounts/accounts.jsx';
 import Units from './views/Units/units.jsx';
-//import Invoices from
 //import Admins from './views/Admins/admins.jsx';
 import Invoices from './views/Invoices/invoices.jsx'
 
@@ -32,7 +31,7 @@ function App() {
           {/*<Route path="admins" element={<Admins  />} />*/}
 
           <Route path="units" element={<Units/>} />
-          {/*<Route path="invoices" element={<Invoices apiUrl={API_URL} />} />*/}
+          <Route path="invoices" element={<Invoices/>} />
           <Route path="overview" element={<Accounts/>} />
 
           <Route path="units" element={<Units  />} />

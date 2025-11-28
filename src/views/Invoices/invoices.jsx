@@ -10,12 +10,12 @@ function Invoices() {
      useEffect(() => {
       const fetchInvoices = async () => {
 
-    try {
+      try {
 
           const response = await fetch(`${API_URL}/api/invoices`);
 
           if (!response.ok) {
-          throw new Error(`Något gick fel, status: ${response.status}. Mer info: ${errorData.message}`);
+          throw new Error(`Något gick fel, status: ${response.status}.`);
         }
 
         const data = await response.json();
@@ -38,7 +38,7 @@ function Invoices() {
         <ul>
           {invoices.map(invoice => (
 
-            <li key={invoice._id}>{invoice.email}</li>
+            <li key={invoice.userId}>{invoice.distance}</li>
           ))}
         </ul>
       ) : (
