@@ -12,6 +12,7 @@ import Accounts from './views/Accounts/accounts.jsx';
 import Units from './views/Units/units.jsx';
 //import Invoices from
 //import Admins from './views/Admins/admins.jsx';
+import Invoices from './views/Invoices/invoices.jsx'
 
 //const API_URL = "http://localhost:5173"
 //const API_URL = "http://localhost:3000"
