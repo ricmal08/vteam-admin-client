@@ -9,7 +9,7 @@ import './App.css'
 import Userinterface from './components/interface/userinterface.jsx';
 import Accounts from './views/Accounts/accounts.jsx';
 import Units from './views/Units/units.jsx';
-//import Invoices from
+import Invoices from './views/Invoices/invoices.jsx'
 
 const API_URL = "http://localhost:5173"
 
