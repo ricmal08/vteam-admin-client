@@ -12,6 +12,7 @@ function Userinterface() {
         <RouterLink className="nav-link" to="/overview">Användare</RouterLink>
         {/*<RouterLink className="nav-link" to="/admins">Administratörer</RouterLink>*/ }
         <RouterLink className="nav-link" to="/units">Fordon</RouterLink>
+        <RouterLink className="nav-link" to="/invoices">Fakturor</RouterLink>
       </nav>
       <main>
         <Outlet />
