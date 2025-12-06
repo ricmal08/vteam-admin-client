@@ -35,17 +35,33 @@ function Invoices() {
       <h2 className="invoices-title">Fakturor</h2>
 
       {invoices.length > 0 ? (
-        <ul>
+      <table className={invoices.dataTable}>
+        <thead>
+          <tr>
+            <th>Faktura-ID</th>
+            <th></th>
+            <th>Datum</th>
+            <th>Belopp</th>
+          </tr>
+        </thead>
+        <tbody>
           {invoices.map(invoice => (
-
-            <li key={invoice.userId}>{invoice.distance}</li>
+            <tr key={invoice.userId}>
+              <td></td>
+              <td></td>
+              {/*<td></td>*/}
+              {/*<td></td>*/}
+              <td>{new Date(invoice.date).toLocaleDateString("sv-SE")}</td>
+              <td>{invoice.amount} kr</td>
+            </tr>
           ))}
-        </ul>
-      ) : (
-        <p>Inga fakturor kunde hittas.</p>
-      )}
-    </div>
-  );
+        </tbody>
+      </table>
+    ) : (
+      <p>Inga fakturor kunde hittas.</p>
+    )}
+  </div>
+);
 }
 
 export default Invoices;
