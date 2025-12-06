@@ -1,25 +1,33 @@
 .layout-container {
-  padding: 2rem; /* Ersätter p={8} */
+  padding: 2rem;
+}
+
+.layout-searchbar {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1.5rem;
+  background-color: #2d2d2d;
+
 }
 
 .nav-menu {
-  /* Detta återskapar VStack */
+
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Ersätter align="start" */
-  gap: 1rem; /* Ersätter spacing={4} */
+  align-items: flex-start;
+  gap: 1rem;
 
-  /* Detta återskapar border-stilen */
+
   border: 1px solid #e2e8f0;
-  padding: 1rem; /* Ersätter p={4} */
-  border-radius: 8px; /* Ersätter borderRadius="md" */
-  margin-bottom: 2rem; /* Lite luft till main-innehållet */
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
 }
 
 .nav-title {
-  font-size: 1.25rem; /* Ungefär som size="lg" */
+  font-size: 1.25rem;
   font-weight: bold;
-  margin: 0; /* Nollställ default-marginal för rubriker */
+  margin: 0;
 }
 
 .nav-link {
@@ -29,4 +37,9 @@
 
 .nav-link:hover {
   text-decoration: underline;
+}
+
+.content-container {
+   padding: 2rem;
+
 }
