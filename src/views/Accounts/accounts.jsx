@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-//import { Box, Heading, VStack } from '@chakra-ui/react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useParams, useNavigate } from 'react-router-dom';
 import './accounts.css';
@@ -17,7 +16,7 @@ function Accounts() {
           const response = await fetch(`${API_URL}/api/users`);
 
           if (!response.ok) {
-          throw new Error(`Något gick fel, status: ${response.status}. Mer info: ${errorData.message}`);
+          throw new Error(`Något gick fel, status: ${response.status}.`);
         }
 
         const data = await response.json();
@@ -37,12 +36,29 @@ function Accounts() {
       <h2 className="accounts-title">Användare</h2>
 
       {users.length > 0 ? (
-        <ul>
+      <table className={users.dataTable}>
+        <thead>
+          <tr>
+            <th>E-post</th>
+            <th></th>
+            <th>Lösenord</th>
+            <th></th>
+            <th>Ta bort</th>
+            <th>Ändra</th>
+        </tr>
+      </thead>
+      <tbody>
           {users.map(user => (
-
-            <li key={user._id}>{user.email}</li>
+            <tr key={user.email}>
+              <td>{user.email}</td>
+              <td></td>
+              <td>{user.password}</td>
+              <td></td>
+              <td></td>
+            </tr>
           ))}
-        </ul>
+        </tbody>
+      </table>
       ) : (
         <p>Inga användare kunde hittas.</p>
       )}
