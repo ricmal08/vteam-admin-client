@@ -11,6 +11,7 @@ import Userinterface from './components/interface/userinterface.jsx';
 import Accounts from './views/Accounts/accounts.jsx';
 import Units from './views/Units/units.jsx';
 //import Admins from './views/Admins/admins.jsx';
+import Invoices from './views/Invoices/invoices.jsx'
 
 //const API_URL = "http://localhost:5173"
 //const API_URL = "http://localhost:3000"
@@ -29,6 +30,8 @@ function App() {
 
           {/*<Route path="admins" element={<Admins  />} />*/}
 
+          <Route path="units" element={<Units/>} />
+          <Route path="invoices" element={<Invoices/>} />
           <Route path="overview" element={<Accounts/>} />
 
           <Route path="units" element={<Units  />} />
