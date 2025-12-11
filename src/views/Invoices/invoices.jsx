@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
 import './invoices.css';
 import { API_URL } from "../../config.js"
 
@@ -33,24 +34,26 @@ function Invoices() {
 <div className="invoices-container">
 
       <h2 className="invoices-title">Fakturor</h2>
+      <h3 className="invoices-create"><Link>Skapa faktura</Link></h3>
 
       {invoices.length > 0 ? (
       <table className={invoices.dataTable}>
         <thead>
           <tr>
             <th>Faktura-ID</th>
-            <th></th>
+            <th>Kundnummer</th>
             <th>Datum</th>
             <th>Belopp</th>
           </tr>
         </thead>
         <tbody>
           {invoices.map(invoice => (
-            <tr key={invoice.userId}>
-              <td></td>
-              <td></td>
-              {/*<td></td>*/}
-              {/*<td></td>*/}
+            <tr key={invoice._id}>
+              <td><Link
+                  to={`/invoices/${invoice._id}`}>
+                  {invoice._id}
+                </Link></td>
+              <td>{invoice.userId}</td>
               <td>{new Date(invoice.date).toLocaleDateString("sv-SE")}</td>
               <td>{invoice.amount} kr</td>
             </tr>

@@ -12,23 +12,11 @@
   margin-bottom: 1.5rem;
 }
 
-
-
-.dataTable {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.dataTable th, .dataTable td {
-  padding: 0.75rem;
+.invoice-details p {
   text-align: left;
-  border-bottom: 1px solid #444;
+  margin-bottom: 0.5rem;
 }
 
-.dataTable th {
-  font-weight: bold;
-}
-
-.dataTable tbody tr:hover {
-  background-color: #3a3a3a;
+.company-info {
+  margin-top: 5rem;
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-//import { Box, Heading, VStack } from '@chakra-ui/react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
@@ -12,6 +11,7 @@ import Accounts from './views/Accounts/accounts.jsx';
 import Units from './views/Units/units.jsx';
 //import Admins from './views/Admins/admins.jsx';
 import Invoices from './views/Invoices/invoices.jsx'
+import Invoice from './views/Invoices/invoice.jsx'
 
 //const API_URL = "http://localhost:5173"
 //const API_URL = "http://localhost:3000"
@@ -31,7 +31,11 @@ function App() {
           {/*<Route path="admins" element={<Admins  />} />*/}
 
           <Route path="units" element={<Units/>} />
+
+          {/* Invoices-endpoints */}
           <Route path="invoices" element={<Invoices/>} />
+          <Route path="invoices/:invoiceId" element={<Invoice />} />
+
           <Route path="overview" element={<Accounts/>} />
 
           <Route path="units" element={<Units  />} />

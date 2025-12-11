@@ -17,19 +17,7 @@ function Userinterface() {
       <main>
         <Outlet />
       </main>
-      <div className="main-container">
-        <nav className="nav-menu">
-          <h2 className="nav-title">Admin-Client</h2>
-          <h3> Innehåll: </h3>
-          <RouterLink className="nav-link" to="/">Översikt</RouterLink>
-          <RouterLink className="nav-link" to="/overview">Användare</RouterLink>
-          {/*<RouterLink className="nav-link" to="/admins">Administratörer</RouterLink>*/ }
-          <RouterLink className="nav-link" to="/units">Fordon</RouterLink>
-          <RouterLink className="nav-link" to="/invoices">Fakturor</RouterLink>
-        </nav>
-        <main className="content-container">
-          <Outlet />
-        </main>
+
 
         <aside className="layout-searchbar">
           <div className="layout-box">
@@ -42,7 +30,7 @@ function Userinterface() {
         </aside>
 
       </div>
-    </div>
+  
   );
 }
 
