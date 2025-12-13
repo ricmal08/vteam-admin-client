@@ -32,24 +32,46 @@ function Invoice() {
     fetchInvoice();
 }, [invoiceId])
 
+const handleMarkAsPaid = async () => {
+    try {
+      const response = await fetch(`${API_URL}/api/invoices/${invoiceId}/paid`, {
+        method: 'PATCH',
+      });
+
+      if (!response.ok) {
+        throw new Error(`Kunde inte uppdatera fakturan. Status: ${response.status}`);
+      }
+
+      const updatedInvoice = await response.json();
+
+      setInvoice(updatedInvoice);
+
+    } catch (err) {
+      console.error("Fel vid uppdatering:", err);
+      alert(err.message);
+    }
+  };
+
+
  if (!invoice) {
-    return <div>Hittade ingen faktura med det angivna ID:t.</div>;
+    return <div>Hittar ingen faktura med angivet fakturanummer.</div>;
   }
  return (
 
 <div className="invoice-container">
+    <div className="invoice-actions">
+        {!invoice.paid && (
+          <button onClick={handleMarkAsPaid}>Markera som betald</button>
+        )}
+        </div>
 
       <h2 className="invoice-title">Info:</h2>
-        <div className="invoice-actions">
-        <button>Ändra</button>
-        <button>Markera som betald</button>
-        <button>Ta bort</button>
-        </div>
+        
 
         <div className="invoice-details">
         <p><strong>Status:</strong> {invoice.paid ? "Betald" : "Obetald"}</p>
         <p><strong>Fakturanummer:</strong> {invoice._id}</p>
-        <p><strong>Kund-ID:</strong> {invoice.userId}</p>    
+        <p><strong>Kundnummer:</strong> {invoice.userId}</p>    
         <p><strong>Datum:</strong> {new Date(invoice.date).toLocaleString('sv-SE')}</p>
         <p><strong>Service: Genomförd färd</strong></p>
         <p> <strong>Antal: </strong> 1 st</p>

@@ -29,21 +29,47 @@ function Invoices() {
     };
     fetchInvoices();
 }, [])
+
+ const handleDelete = async (invoiceId) => {
+
+      try {
+      const response = await fetch(`${API_URL}/api/invoices/${invoiceId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error(`Kunde inte ta bort fakturan. Status: ${response.status}`);
+      }
+
+      setInvoices(currentInvoices => 
+        currentInvoices.filter(invoice => invoice._id !== invoiceId)
+      );
+
+    } catch (err) {
+      console.error("Fel vid borttagning:", err);
+      //TODO: felhantering
+      alert(err.message);
+    }
+
+  };
  return (
 
 <div className="invoices-container">
 
       <h2 className="invoices-title">Fakturor</h2>
-      <h3 className="invoices-create"><Link>Skapa faktura</Link></h3>
+      <Link to="/invoices/create" className="invoices-create">
+        + Skapa faktura
+      </Link>
 
       {invoices.length > 0 ? (
       <table className={invoices.dataTable}>
         <thead>
           <tr>
-            <th>Faktura-ID</th>
+            <th>Fakturnummer</th>
             <th>Kundnummer</th>
             <th>Datum</th>
             <th>Belopp</th>
+            <th>Ta bort</th>
           </tr>
         </thead>
         <tbody>
@@ -56,6 +82,11 @@ function Invoices() {
               <td>{invoice.userId}</td>
               <td>{new Date(invoice.date).toLocaleDateString("sv-SE")}</td>
               <td>{invoice.amount} kr</td>
+              <td>
+              <button 
+                  onClick={() => handleDelete(invoice._id)} >
+              </button>
+              </td>
             </tr>
           ))}
         </tbody>

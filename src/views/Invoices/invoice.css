@@ -2,7 +2,7 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 1.5rem;
-  background-color: #2d2d2d;
+  background-color: #faf7f7;
 }
 
 .invoice-title {
@@ -10,29 +10,21 @@
   border-bottom: 2px solid #444;
   padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
+  color: black;
+}
+
+.invoice-container p{
+  color: black;
 }
 
 
-
-.dataTable {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.dataTable th, .dataTable td {
-  padding: 12px 15px;
+.invoice-details p {
   text-align: left;
-  border-bottom: 1px solid #444;
+  margin-bottom: 0.5rem;
 }
 
-.dataTable tr th {
-  font-weight: bold;
-}
-
-.dataTable tbody tr:hover {
-  background-color: #3a3a3a;
-}
-
-.dataTable td:first-child {
-  padding-right: 30px; 
+.company-info {
+  border-top: 2px solid #444;
+  margin-top: 5rem;
+  border-bottom: 2px solid #444;
 }
