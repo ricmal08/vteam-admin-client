@@ -1,5 +1,4 @@
 import React from 'react';
-//import { Box, Heading, VStack } from '@chakra-ui/react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
@@ -7,6 +6,7 @@ import viteLogo from '/vite.svg'
 //import { API_URL } from './config.js';
 import './App.css'
 
+import Login from './views/Login/login.jsx';
 import Userinterface from './components/interface/userinterface.jsx';
 import Accounts from './views/Accounts/accounts.jsx';
 import Units from './views/Units/units.jsx';
@@ -18,10 +18,14 @@ import Invoices from './views/Invoices/invoices.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [token, setToken] = useState(localStorage.getItem('accessToken'));
 
   return (
      <BrowserRouter>
       <Routes>
+
+
+        <Route path="/login" element={<Login setToken={setToken} />} />
        
         <Route path="/" element={<Userinterface />}>
 

@@ -1,24 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useParams, useNavigate } from 'react-router-dom';
 import './invoices.css';
 import { API_URL } from "../../config.js"
+import { apiRequest } from '../../api/api.js';
 
 function Invoices() {
   const [invoices, setInvoices] = useState([]);
+  const [error, setError] = useState(null);
 
      useEffect(() => {
       const fetchInvoices = async () => {
 
       try {
 
-          const response = await fetch(`${API_URL}/api/invoices`);
-
-          if (!response.ok) {
-          throw new Error(`Något gick fel, status: ${response.status}.`);
-        }
-
-        const data = await response.json();
+        const data = await apiRequest('/api/invoices');
         setInvoices(data);
           // TODO: ordna eventuellt fler kontroller
         } catch (err) {
