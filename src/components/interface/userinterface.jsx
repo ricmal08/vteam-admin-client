@@ -19,6 +19,7 @@ function Userinterface() {
         <Outlet />
       </main>
 
+
         <aside className="layout-searchbar">
           <div className="layout-box">
             <h3>Sök:</h3>
@@ -30,6 +31,7 @@ function Userinterface() {
         </aside>
 
       </div>
+  
   );
 }
 

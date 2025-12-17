@@ -12,7 +12,8 @@ import Accounts from './views/Accounts/accounts.jsx';
 import Units from './views/Units/units.jsx';
 //import Admins from './views/Admins/admins.jsx';
 import Invoices from './views/Invoices/invoices.jsx'
-
+import Invoice from './views/Invoices/invoice.jsx'
+import CreateInvoice from './views/Invoices/createInvoice.jsx';
 //const API_URL = "http://localhost:5173"
 //const API_URL = "http://localhost:3000"
 
@@ -35,10 +36,15 @@ function App() {
           {/*<Route path="admins" element={<Admins  />} />*/}
 
           <Route path="units" element={<Units/>} />
+
+          {/* Invoices-endpoints */}
           <Route path="invoices" element={<Invoices/>} />
+          <Route path="invoices/:invoiceId" element={<Invoice />} />
+          <Route path="invoices/create" element={<CreateInvoice/>} />
+
           <Route path="overview" element={<Accounts/>} />
 
-          <Route path="units" element={<Units  />} />
+          <Route path="units" element={<Units/>} />
 
         </Route>
       </Routes>
