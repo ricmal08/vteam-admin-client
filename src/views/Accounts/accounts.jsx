@@ -3,9 +3,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useParams, useNavigate } from 'react-router-dom';
 import './accounts.css';
 import { API_URL } from "../../config.js"
+import { apiRequest } from '../../api/api.js';
 
 function Accounts() {
   const [users, setUsers] = useState([]);
+  const [error, setError] = useState(null);
 
     useEffect(() => {
       const fetchUsers = async () => {
@@ -13,14 +15,9 @@ function Accounts() {
 
         try {
 
-          const response = await fetch(`${API_URL}/api/users`);
+          const data = await apiRequest('/api/users');
 
-          if (!response.ok) {
-          throw new Error(`Något gick fel, status: ${response.status}.`);
-        }
-
-        const data = await response.json();
-        setUsers(data);
+          setUsers(data);
           // TODO: ordna eventuellt fler kontroller
         } catch (err) {
           console.error("Ett fel inträffade vid fetch:", err);
