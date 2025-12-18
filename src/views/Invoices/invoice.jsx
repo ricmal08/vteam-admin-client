@@ -3,25 +3,22 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useParams, useNavigate } from 'react-router-dom';
 import './invoice.css';
 import { API_URL } from "../../config.js"
+import { apiRequest } from '../../api/api.js';
 
 function Invoice() {
   const{invoiceId} = useParams();
   const [invoice, setInvoice] = useState(null);
+  const [error, setError] = useState(null);
 
-     useEffect(() => {
+    useEffect(() => {
 
       if(!invoiceId) return
+
       const fetchInvoice = async () => {
 
       try {
-          console.log(invoiceId)
-          const response = await fetch(`${API_URL}/api/invoices/${invoiceId}`);
 
-          if (!response.ok) {
-          throw new Error(`Något gick fel, status: ${response.status}.`);
-        }
-
-        const data = await response.json();
+        const data = await apiRequest(`/api/invoices/${invoiceId}`);
         setInvoice(data);
           // TODO: ordna eventuellt fler kontroller
         } catch (err) {
@@ -34,16 +31,12 @@ function Invoice() {
 
 const handleMarkAsPaid = async () => {
     try {
-      const response = await fetch(`${API_URL}/api/invoices/${invoiceId}/paid`, {
+       //uppdaterar datan direkt, behöver ej lagra det
+        await apiRequest(`/api/invoices/${invoiceId}/paid`, {
         method: 'PATCH',
       });
-
-      if (!response.ok) {
-        throw new Error(`Kunde inte uppdatera fakturan. Status: ${response.status}`);
-      }
-
-      const updatedInvoice = await response.json();
-
+      //hämta om fakturan med uppdaterade datapunkten.
+      const updatedInvoice = await apiRequest(`/api/invoices/${invoiceId}`);
       setInvoice(updatedInvoice);
 
     } catch (err) {

@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-//import { API_URL } from './config.js';
 import './App.css'
 
 import Login from './views/Login/login.jsx';
@@ -14,8 +13,6 @@ import Units from './views/Units/units.jsx';
 import Invoices from './views/Invoices/invoices.jsx'
 import Invoice from './views/Invoices/invoice.jsx'
 import CreateInvoice from './views/Invoices/createInvoice.jsx';
-//const API_URL = "http://localhost:5173"
-//const API_URL = "http://localhost:3000"
 
 function App() {
   const [count, setCount] = useState(0)
@@ -39,8 +36,9 @@ function App() {
 
           {/* Invoices-endpoints */}
           <Route path="invoices" element={<Invoices/>} />
-          <Route path="invoices/:invoiceId" element={<Invoice />} />
           <Route path="invoices/create" element={<CreateInvoice/>} />
+          <Route path="invoices/:invoiceId" element={<Invoice />} />
+          
 
           <Route path="overview" element={<Accounts/>} />
 

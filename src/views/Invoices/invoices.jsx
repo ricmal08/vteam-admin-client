@@ -15,9 +15,10 @@ function Invoices() {
 
       try {
 
-        const data = await apiRequest('/api/invoices');
-        setInvoices(data);
-          // TODO: ordna eventuellt fler kontroller
+          const data = await apiRequest('/api/invoices');
+          console.log("Mottagen data från /api/invoices:", data); 
+          setInvoices(data);
+            // TODO: ordna eventuellt fler kontroller
         } catch (err) {
           console.error("Ett fel inträffade vid fetch:", err);
          
@@ -29,23 +30,20 @@ function Invoices() {
  const handleDelete = async (invoiceId) => {
 
       try {
-      const response = await fetch(`${API_URL}/api/invoices/${invoiceId}`, {
-        method: 'DELETE',
-      });
 
-      if (!response.ok) {
-        throw new Error(`Kunde inte ta bort fakturan. Status: ${response.status}`);
+        await apiRequest(`/api/invoices/${invoiceId}`, {
+              method: 'DELETE',
+        });
+
+        setInvoices(currentInvoices => 
+            currentInvoices.filter(invoice => invoice._id !== invoiceId)
+        );
+
+      } catch (err) {
+        console.error("Fel vid borttagning:", err);
+        //TODO: felhantering
+        alert(err.message);
       }
-
-      setInvoices(currentInvoices => 
-        currentInvoices.filter(invoice => invoice._id !== invoiceId)
-      );
-
-    } catch (err) {
-      console.error("Fel vid borttagning:", err);
-      //TODO: felhantering
-      alert(err.message);
-    }
 
   };
  return (
