@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './accounts.css';
-import { API_URL } from "../../config.js"
 import { apiRequest } from '../../api/api.js';
 
 function Accounts() {
@@ -26,32 +26,57 @@ function Accounts() {
     };
     fetchUsers();
 }, [])
+
+const handleDelete = async (userId) => {
+
+      try {
+
+        await apiRequest(`/api/users/${userId}`, {
+              method: 'DELETE',
+        });
+
+        setUsers(currentUsers => 
+            currentUsers.filter(user => user._id !== userId)
+        );
+
+      } catch (err) {
+        console.error("Fel vid borttagning:", err);
+        //TODO: felhantering
+        alert(err.message);
+      }
+  };
  return (
 
 <div className="accounts-container">
 
       <h2 className="accounts-title">Användare</h2>
+        <Link to="/users/create" className="users-create">
+          + Lägg till
+        </Link>
 
       {users.length > 0 ? (
       <table className={users.dataTable}>
         <thead>
           <tr>
             <th>E-post</th>
-            <th></th>
-            <th>Lösenord</th>
-            <th></th>
-            <th>Ta bort</th>
             <th>Ändra</th>
+            <th>Ta bort</th>
         </tr>
       </thead>
       <tbody>
           {users.map(user => (
             <tr key={user.email}>
               <td>{user.email}</td>
-              <td></td>
-              <td>{user.password}</td>
-              <td></td>
-              <td></td>
+              <td>
+                <Link to={`/users/${user._id}`}>
+                  <button></button>
+                </Link>
+              </td>
+              <td>
+              <button 
+                  onClick={() => handleDelete(user._id)} >
+              </button>
+              </td>
             </tr>
           ))}
         </tbody>

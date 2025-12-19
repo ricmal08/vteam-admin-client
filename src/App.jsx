@@ -8,11 +8,15 @@ import './App.css'
 import Login from './views/Login/login.jsx';
 import Userinterface from './components/interface/userinterface.jsx';
 import Accounts from './views/Accounts/accounts.jsx';
+import User from './views/Accounts/account.jsx';
 import Units from './views/Units/units.jsx';
 //import Admins from './views/Admins/admins.jsx';
 import Invoices from './views/Invoices/invoices.jsx'
 import Invoice from './views/Invoices/invoice.jsx'
 import CreateInvoice from './views/Invoices/createInvoice.jsx';
+import CreateUser from './views/Accounts/createUser.jsx';
+import EditUser from './views/Accounts/editUser.jsx';
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -22,27 +26,31 @@ function App() {
      <BrowserRouter>
       <Routes>
 
-
         <Route path="/login" element={<Login setToken={setToken} />} />
-       
         <Route path="/" element={<Userinterface />}>
-
-          {/*Dashboard-komponent
-          <Route index element={<Dashboard />} />*/}
-
-          {/*<Route path="admins" element={<Admins  />} />*/}
-
-          <Route path="units" element={<Units/>} />
-
-          {/* Invoices-endpoints */}
-          <Route path="invoices" element={<Invoices/>} />
-          <Route path="invoices/create" element={<CreateInvoice/>} />
-          <Route path="invoices/:invoiceId" element={<Invoice />} />
+          
+        
           
 
-          <Route path="overview" element={<Accounts/>} />
+            {/*Dashboard-komponent
+            <Route index element={<Dashboard />} />*/}
 
-          <Route path="units" element={<Units/>} />
+            {/*<Route path="admins" element={<Admins  />} />*/}
+
+            <Route path="units" element={<Units/>} />
+
+            {/* Invoices-endpoints */}
+            <Route path="invoices" element={<Invoices/>} />
+            <Route path="invoices/create" element={<CreateInvoice/>} />
+            <Route path="invoices/:invoiceId" element={<Invoice />} />
+            
+            {/* Users-endpoints */}
+            <Route path="users" element={<Accounts/>} />
+            <Route path="users/create" element={<CreateUser/>} />
+            <Route path="users/:userId" element={<User />} />
+            <Route path="users/:userId/edit" element={<EditUser />} />
+
+            <Route path="units" element={<Units/>} />
 
         </Route>
       </Routes>
