@@ -15,9 +15,10 @@ import EditUser from './views/Accounts/editUser.jsx';
 import Bikes from './views/Bikes/bikes.jsx';
 import CreateBike from './views/Bikes/createBike.jsx';
 import EditBike from './views/Bikes/editBike.jsx';
-//import Admins from './views/Admins/admins.jsx';
-import Invoices from './views/Invoices/invoices.jsx'
-import Invoice from './views/Invoices/invoice.jsx'
+import Admins from './views/Admins/admins.jsx';
+import CreateAdmin from './views/Admins/createAdmin.jsx';
+import Invoices from './views/Invoices/invoices.jsx';
+import Invoice from './views/Invoices/invoice.jsx';
 import CreateInvoice from './views/Invoices/createInvoice.jsx';
 
 
@@ -40,9 +41,11 @@ function App() {
             {/*Dashboard-komponent
             <Route index element={<Dashboard />} />*/}
 
-            {/*<Route path="admins" element={<Admins  />} />*/}
-            
-            {/* Invoices-endpoints */}
+            {/* Admins-endpoints */}
+            <Route path="admins" element={<Admins />} />
+            <Route path="admins/create" element={<CreateAdmin/>} />
+
+            {/* Bikes-endpoints */}
             <Route path="bikes" element={<Bikes/>} />
             <Route path="bikes/create" element={<CreateBike/>} />
             <Route path="bikes/:bikeId" element={<EditBike />} />
