@@ -7,6 +7,7 @@ import { apiRequest } from '../../api/api.js';
 
 function Admins() {
   const [admins, setAdmins] = useState([]);
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -16,9 +17,12 @@ function Admins() {
         try {
 
           const data = await apiRequest('/api/admins');
-          console.log("Mottagen data för admins:", data); 
+          if (data && data.length > 0 && data[0].role !== undefined) {
+          setIsSuperAdmin(true);
+        } else {
+          setIsSuperAdmin(false);
+        }
           setAdmins(data);
-          // TODO: ordna eventuellt fler kontroller
         } catch (err) {
           console.error("Ett fel inträffade vid fetch:", err);
          
@@ -27,16 +31,15 @@ function Admins() {
     fetchAdmins();
 }, [])
 
-const handleDelete = async (adminId) => {
+const handleDelete = async (adminEmail) => {
 
       try {
-        //fungerar inte då controllern vänta sig req params: email
-        await apiRequest(`/api/admins/${adminId}`, {
+        await apiRequest(`/api/admins/${adminEmail}`, {
               method: 'DELETE',
         });
 
         setAdmins(currentAdmins => 
-            currentAdmins.filter(admin => admin.id !== adminId)
+            currentAdmins.filter(admin => admin.email !== adminEmail)
         );
 
       } catch (err) {
@@ -56,24 +59,22 @@ const handleDelete = async (adminId) => {
             <table className={admins.dataTable}>
               <thead>
                 <tr>
-                  <th>Behörighet</th>
+                  {isSuperAdmin && <th>Behörighet</th>}
                   <th>Id</th>
                   <th>E-post</th>
-                  <th>Ändra</th>{/*}Kräver tillägg i admins.controller.js {*/}
-                  <th>Ta bort</th>{/*}Kräver tillägg i adminds.controller.js {*/}
+                  <th>Ta bort</th>
               </tr>
             </thead>
             <tbody>
                 {admins.map(admin => (
                   <tr key={admin.id}>
-                    <td>{admin.role}</td>
+                    {isSuperAdmin && <td>{admin.role}</td>}
                     <td>{admin.id}</td>
                     <td>{admin.email}</td>
-                    <td>
-                     <p>placeholder</p>
-                    </td>
-                    <td>
-                    <p>placeholder</p>
+                     <td>
+                      <button onClick={() => handleDelete(admin.email)}>
+                        Ta bort
+                      </button>
                     </td>
                   </tr>
                 ))}
