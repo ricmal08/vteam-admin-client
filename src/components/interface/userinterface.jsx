@@ -16,22 +16,12 @@ function Userinterface() {
         <RouterLink className="nav-link" to="/users">Zoner</RouterLink>
         <RouterLink className="nav-link" to="/invoices">Fakturor</RouterLink>
         <RouterLink className="nav-link" to="/admins">Administratörer</RouterLink>
-        <RouterLink className="nav-link" to="/admins">Dashboard</RouterLink>
+        <RouterLink className="nav-link" to="/map">Karta</RouterLink>
       </nav>
-      <main>
+      <main className="content-container">
         <Outlet />
       </main>
 
-
-        <aside className="layout-searchbar">
-          <div className="layout-box">
-            <h3>Sök:</h3>
-            <p>Kundnummer:</p>
-            <p>Kontonummer:</p>
-            <p>Registreringsnummer:</p>
-            <p>Fakturanummer:</p>
-          </div>
-        </aside>
 
       </div>
   
