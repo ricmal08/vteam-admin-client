@@ -7,7 +7,8 @@ import { apiRequest } from '../../api/api.js';
 function City() {
   const{cityId} = useParams();
   const [city, setCity] = useState(null);
-  const [zones, setZones] = useState(null);
+  const [zones, setZones] = useState([]);
+  const [bikes, setBikes] = useState([]); 
   const [error, setError] = useState([]);
 
     useEffect(() => {
@@ -33,42 +34,76 @@ function City() {
         const fetchZones = async () => {
             const zonesData = await apiRequest(`/api/cities/${cityId}/zones`);
             setZones(zonesData);
+            console.log('zondata:', zonesData)
         };
         fetchZones();
+    }, [cityId]);
+
+    useEffect(() => {
+        const fetchBikes = async () => {
+            const bikesData = await apiRequest(`/api/cities/${cityId}/bikes`);
+            setBikes(bikesData);
+            console.log('cykeldata:', bikesData)
+        };
+        fetchBikes();
     }, [cityId]);
 
  if (!city) {
     return <div>Hittar ingen stad med angivet ID.</div>;
   }
  return (
+  <div className="city-container">
+    <h2>{city.name}</h2>
+    <p><strong>Totalt antal cyklar i staden:</strong> {bikes.length}</p>
+    
+    <h3>Laddstationer & Zoner</h3>
+    {zones.length > 0 ? (
+      <ul>
+        {zones.map(zone => {
+          const bikesInZone = bikes.filter(bike => bike.startingzone === zone._id);
+          
+          return (
+            <li key={zone._id}>
+              {/* Do we want zone.typeOfZone here? */}
+              <strong>{zone.name}</strong> (Typ: {zone.typeOfZone}, Antal cyklar: {bikesInZone.length})
+              
+              {bikesInZone.length > 0 && (
+                <ul>
+                  {bikesInZone.map(bike => (
+                    //Dispay bike info
+                    <li key={bike._id}>
+                      ID: {bike._id} | Batteri: {bike.battery}% | Status: {bike.inUse ? 'Uthyrd' : 'Ledig'}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    ) : (
+      <p>Inga zoner hittades för denna stad.</p>
+    )}
 
-  <div>
-        <h2>{city.name}</h2>
-        
-        <h3>Laddstationer/Zoner</h3>
-        {zones.length > 0 ? (
-            <ul>
-                {zones.map(zone => {
-                    //filter på cyklar som tillhör specifikt zone._id
-                    const bikesInZone = bikes.filter(bike => bike.currentZone === zone._id);
-                    console.log('bikesInZone', bikesInZone)
-
-                    return (
-                        <li key={zone._id}>
-                            <strong>{zone.name}</strong> (Antal cyklar: {bikesInZone.length})
-                            {/* visar upp vilka cyklar som tillhör specifikt zone._id */}
-                            <ul>
-                                {bikesInZone.map(bike => <li key={bike._id}>Cykel ID: {bike._id}</li>)}
-                            </ul>
-                        </li>
-                    );
-                })}
-            </ul>
-        ) : (
-            <p>Inga zoner hittades för denna stad.</p>
-        )}
-    </div>
-  );
+    <h3>Avvikande parkering (inte i en zon)</h3>
+    {(() => {
+      const freeparkedBikes = bikes.filter(bike => !bike.startingzone);
+      if (freeparkedBikes.length === 0) {
+        return <p>Inga cyklar med avvikande parkering hittades.</p>;
+      }
+      return (
+        <ul>
+          {freeparkedBikes.map(bike => (
+            //display bikeinfo for freeparkedBikes
+            <li key={bike._id}>
+              ID: {bike._id} | Batteri: {bike.battery}% | Status: {bike.inUse ? 'Uthyrd' : 'Ledig'}
+            </li>
+          ))}
+        </ul>
+      );
+    })()}
+  </div>
+);
 }
 
 export default City;
