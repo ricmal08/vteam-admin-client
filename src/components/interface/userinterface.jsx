@@ -13,7 +13,6 @@ function Userinterface() {
         <RouterLink className="nav-link" to="/users">Användare</RouterLink>
         <RouterLink className="nav-link" to="/bikes">Cyklar</RouterLink>
         <RouterLink className="nav-link" to="/cities">Städer</RouterLink>
-        <RouterLink className="nav-link" to="/users">Zoner</RouterLink>
         <RouterLink className="nav-link" to="/invoices">Fakturor</RouterLink>
         <RouterLink className="nav-link" to="/admins">Administratörer</RouterLink>
         <RouterLink className="nav-link" to="/map">Karta</RouterLink>
