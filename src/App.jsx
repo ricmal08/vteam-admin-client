@@ -6,6 +6,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import 'leaflet/dist/leaflet.css';
 
+import AuthRoute from './components/interface/auth/authRoute.jsx';
 import Login from './views/Login/login.jsx';
 import Userinterface from './components/interface/userinterface.jsx';
 
@@ -45,42 +46,39 @@ function App() {
       <Routes>
 
         <Route path="/login" element={<Login setToken={setToken} />} />
-        <Route path="/" element={<Userinterface />}>
+
+        <Route element={<AuthRoute token={token} />} />  
           
-        
-          
+          <Route path="/" element={<Userinterface />}>
 
-            {/*Dashboard-komponent
-            <Route index element={<Dashboard />} />*/}
+              {/* Admins-endpoints */}
+              <Route path="admins" element={<Admins />} />
+              <Route path="admins/create" element={<CreateAdmin/>} />
 
-            {/* Admins-endpoints */}
-            <Route path="admins" element={<Admins />} />
-            <Route path="admins/create" element={<CreateAdmin/>} />
+              {/* Bikes-endpoints */}
+              <Route path="bikes" element={<Bikes/>} />
+              <Route path="bikes/create" element={<CreateBike/>} />
+              <Route path="bikes/:bikeId" element={<EditBike />} />
 
-            {/* Bikes-endpoints */}
-            <Route path="bikes" element={<Bikes/>} />
-            <Route path="bikes/create" element={<CreateBike/>} />
-            <Route path="bikes/:bikeId" element={<EditBike />} />
+              {/* Invoices-endpoints */}
+              <Route path="invoices" element={<Invoices/>} />
+              <Route path="invoices/create" element={<CreateInvoice/>} />
+              <Route path="invoices/:invoiceId" element={<Invoice />} />
+              
+              {/* Users-endpoints */}
+              <Route path="users" element={<Accounts/>} />
+              <Route path="users/create" element={<CreateUser/>} />
+              <Route path="users/:userId" element={<User />} />
+              <Route path="users/:userId/edit" element={<EditUser />} />
 
-            {/* Invoices-endpoints */}
-            <Route path="invoices" element={<Invoices/>} />
-            <Route path="invoices/create" element={<CreateInvoice/>} />
-            <Route path="invoices/:invoiceId" element={<Invoice />} />
-            
-            {/* Users-endpoints */}
-            <Route path="users" element={<Accounts/>} />
-            <Route path="users/create" element={<CreateUser/>} />
-            <Route path="users/:userId" element={<User />} />
-            <Route path="users/:userId/edit" element={<EditUser />} />
+              {/* Cities-endpoints */}
+              <Route path="cities" element={<Cities/>} />
+              <Route path="cities/create" element={<CreateCity/>} />
+              <Route path="cities/:cityId" element={<City/>} />
+              <Route path="cities/:cityId/edit" element={<EditCity />} />
 
-            {/* Cities-endpoints */}
-            <Route path="cities" element={<Cities/>} />
-            <Route path="cities/create" element={<CreateCity/>} />
-            <Route path="cities/:cityId" element={<City/>} />
-            <Route path="cities/:cityId/edit" element={<EditCity />} />
-
-            {/* Map-endpoints */}
-            <Route path="map" element={<Map/>} />
+              {/* Map-endpoints */}
+              <Route path="map" element={<Map/>} />
 
 
 

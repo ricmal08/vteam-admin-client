@@ -1,14 +1,29 @@
 import React from 'react';
-import { Link as RouterLink, Outlet } from 'react-router-dom';
+import { Link as RouterLink, Outlet, useNavigate } from 'react-router-dom';
 import './userinterface.css'; 
 
-function Userinterface() {
+function Userinterface(currentUser) {
+
+   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    navigate('/login');
+  };
+
   return (
     <div className="layout-container">
       <nav className="nav-menu">
         <h2 className="nav-title">Admin-Client</h2>
+            <button onClick={handleLogout} className="logout-button">Logga ut</button>
         <h3> Innehåll: </h3>
-        <RouterLink className="nav-link" to="/login">Logga in</RouterLink>
+
+      {!currentUser && (
+      <RouterLink className="nav-link" to="/login">Logga in</RouterLink>
+      )}
+
+      {currentUser && (
+        <>
         <RouterLink className="nav-link" to="/">Översikt</RouterLink>
         <RouterLink className="nav-link" to="/users">Användare</RouterLink>
         <RouterLink className="nav-link" to="/bikes">Cyklar</RouterLink>
@@ -16,6 +31,8 @@ function Userinterface() {
         <RouterLink className="nav-link" to="/invoices">Fakturor</RouterLink>
         <RouterLink className="nav-link" to="/admins">Administratörer</RouterLink>
         <RouterLink className="nav-link" to="/map">Karta</RouterLink>
+        </>
+        )}
       </nav>
       <main className="content-container">
         <Outlet />
