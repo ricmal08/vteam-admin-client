@@ -20,7 +20,6 @@ function User() {
 
         const data = await apiRequest(`/api/users/${userId}`);
         setUser(data);
-          // TODO: ordna eventuellt fler kontroller
         } catch (err) {
           console.error("Ett fel inträffade vid fetch:", err);
          
@@ -34,18 +33,20 @@ function User() {
   }
  return (
 
-<div className="user-container">
-  
-    <div className="user-actions">
-    </div>
-      <h2 className="user-title">Info:</h2>
-        <Link to={`/users/${userId}/edit`}>
-        <button>Redigera användare</button>
-        </Link>
-        <div className="user-details">
-        <p><strong>Kundnummer:</strong> {user._id}</p>
-        <p><strong>Epost:</strong> {user.email}</p>        
-        </div>
+    <div className="user-container">
+        <h2 className="user-title">Info:</h2>
+          <Link to={`/users/${userId}/edit`}>
+          <button>Redigera användare</button>
+          </Link>
+          <div className="user-details">
+          <p><strong>Kundnummer:</strong> {user._id}</p>
+          <p><strong>Förnamn:</strong> {user.firstName}</p>
+          <p><strong>Efternamn:</strong> {user.lastName}</p>    
+          <p><strong>Adress:</strong> {user.city}</p>    
+          <p><strong>Postnummer:</strong> {user.street}</p>    
+          <p><strong>Stad:</strong> {user.zipCode}</p>
+          <p><strong>E-post:</strong> {user.email}</p>       
+          </div>
     </div>
 
 );

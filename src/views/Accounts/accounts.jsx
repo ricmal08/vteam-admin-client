@@ -18,7 +18,6 @@ function Accounts() {
           const data = await apiRequest('/api/users');
 
           setUsers(data);
-          // TODO: ordna eventuellt fler kontroller
         } catch (err) {
           console.error("Ett fel inträffade vid fetch:", err);
          
@@ -41,7 +40,6 @@ const handleDelete = async (userId) => {
 
       } catch (err) {
         console.error("Fel vid borttagning:", err);
-        //TODO: felhantering
         alert(err.message);
       }
   };
@@ -59,6 +57,7 @@ const handleDelete = async (userId) => {
         <thead>
           <tr>
             <th>E-post</th>
+            <th>Kundnummer</th>
             <th>Ändra</th>
             <th>Ta bort</th>
         </tr>
@@ -67,6 +66,7 @@ const handleDelete = async (userId) => {
           {users.map(user => (
             <tr key={user.email}>
               <td>{user.email}</td>
+              <td>{user._id}</td>
               <td>
                 <Link to={`/users/${user._id}`}>
                   <button></button>

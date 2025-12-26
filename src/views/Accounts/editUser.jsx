@@ -1,20 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { apiRequest } from '../../api/api.js';
-
+import './account.css';
 function EditUser() { 
 
   const { userId } = useParams();
   const navigate = useNavigate();
   
-  const [email, setEmail] = useState('');
+  const [updateUserData, setUpdateUserData] = useState({
+    email: '',
+    firstName: '',
+    lastName: '',
+    city: '',
+    street: '',
+    zipCode: '',
+  });
 
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const userData = await apiRequest(`/api/users/${userId}`);
-        setEmail(userData.email);
+
+        setUpdateUserData({
+            email: userData.email || '',
+            firstName: userData.firstName || '',
+            lastName: userData.lastName || '',
+            city: userData.city || '',
+            street: userData.street || '',
+            zipCode: userData.zipCode || '',
+        });
 
       } catch (err) {
         console.error("Fel vid uppdatering:", err);
@@ -24,16 +39,22 @@ function EditUser() {
     fetchUserData();
   }, [userId]);
 
+   const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUpdateUserData(currentState => ({
+        ...currentState,
+        [name]: value,
+    }));
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const updatedUserData = { email };
 
     try {
 
       await apiRequest(`/api/users/${userId}`, {
         method: 'PUT',
-        body: JSON.stringify(updatedUserData),
+        body: JSON.stringify(updateUserData),
       });
 
       navigate('/users'); 
@@ -44,21 +65,61 @@ function EditUser() {
   };
 
   return (
-    <div>
-      <h2>Redigera användare</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          E-post:
-          <input 
-            type="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Spara ändringar</button>
-      </form>
-    </div>
+      <div className="user-container">
+        <h2 className="user-title">Redigera:</h2>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="email">E-post:</label>
+            <input id="email"
+            name="email"
+            type="email" 
+            value={updateUserData.email} 
+            onChange={handleChange} 
+            required />
+          </div>
+          <div>
+            <label htmlFor="firstName">Förnamn:</label>
+            <input id="firstName" 
+            name="firstName" 
+            type="text" 
+            value={updateUserData.firstName} 
+            onChange={handleChange} />
+          </div>
+          <div>
+            <label htmlFor="lastName">Efternamn:</label>
+            <input id="lastName" 
+            name="lastName" 
+            type="text" 
+            value={updateUserData.lastName} 
+            onChange={handleChange} />
+          </div>
+          <div>
+            <label htmlFor="street">Gatuadress:</label>
+            <input id="street" 
+            name="street" 
+            type="text" 
+            value={updateUserData.street} 
+            onChange={handleChange} />
+          </div>
+          <div>
+            <label htmlFor="zipCode">Postnummer:</label>
+            <input id="zipCode" 
+            name="zipCode" 
+            type="text" 
+            value={updateUserData.zipCode} 
+            onChange={handleChange} />
+          </div>
+          <div>
+            <label htmlFor="city">Stad:</label>
+            <input id="city" 
+            name="city" 
+            type="text" 
+            value={updateUserData.city} 
+            onChange={handleChange} />
+          </div>
+          <button type="submit">Spara</button>
+        </form>
+      </div>
   );
 }
 

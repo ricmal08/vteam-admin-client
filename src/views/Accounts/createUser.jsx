@@ -17,7 +17,7 @@ function CreateUser() {
             email,
             password,
     }
-  //console.log(newUserData);
+
     try {
         await apiRequest('/api/users', {
         method: 'POST',
