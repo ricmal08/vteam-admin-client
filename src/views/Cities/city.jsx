@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './city.css';
 import { apiRequest } from '../../api/api.js';
 
@@ -34,7 +35,7 @@ function City() {
         const fetchZones = async () => {
             const zonesData = await apiRequest(`/api/cities/${cityId}/zones`);
             setZones(zonesData);
-            console.log('zondata:', zonesData)
+            //console.log('zondata:', zonesData)
         };
         fetchZones();
     }, [cityId]);
@@ -43,20 +44,19 @@ function City() {
         const fetchBikes = async () => {
             const bikesData = await apiRequest(`/api/cities/${cityId}/bikes`);
             setBikes(bikesData);
-            console.log('cykeldata:', bikesData)
         };
         fetchBikes();
     }, [cityId]);
 
  if (!city) {
-    return <div>Hittar ingen stad med angivet ID.</div>;
+    return <div>Hittar ingen stad med angivet Id.</div>;
   }
  return (
   <div className="city-container">
-    <h2>{city.name}</h2>
+    <h2 className="city-title">{city.name}</h2>
     <p><strong>Totalt antal cyklar i staden:</strong> {bikes.length}</p>
     
-    <h3>Laddstationer & Zoner</h3>
+    <h3>Zoner</h3>
     {zones.length > 0 ? (
       <ul>
         {zones.map(zone => {
@@ -64,17 +64,28 @@ function City() {
           
           return (
             <li key={zone._id}>
-              {/* Do we want zone.typeOfZone here? */}
-              <strong>{zone.name}</strong> (Typ: {zone.typeOfZone}, Antal cyklar: {bikesInZone.length})
+              <strong>{zone.name}</strong> (Zon: {zone.typeOfZone}, Antal cyklar: {bikesInZone.length})
               
               {bikesInZone.length > 0 && (
                 <ul>
-                  {bikesInZone.map(bike => (
-                    //Dispay bike info
-                    <li key={bike._id}>
-                      ID: {bike._id} | Batteri: {bike.battery}% | Status: {bike.inUse ? 'Uthyrd' : 'Ledig'}
-                    </li>
-                  ))}
+                  {bikesInZone.map(bike => {
+                    let statusText = bike.inUse ? 'Upptagen' : 'Ledig';
+                    if (bike.blocked) statusText = 'Blockad';
+                    if (bike.charging) statusText = 'Laddar';
+
+                    const mapsLink = `https://www.google.com/maps?q=${bike.position.latitude},${bike.position.longitude}`;
+                    return (
+                      <li key={bike._id}>
+                        Id: {bike._id} | Batteri: {bike.battery}% | Status: {statusText} |
+                        Position: {bike.position.latitude.toFixed(4)}(Y), {bike.position.longitude.toFixed(4)}(X)  |
+
+                        {/*adding rel"noopener noreferrer" to guard against refferer page being swapped for intrusion*/}
+                        <a href={mapsLink} target="_blank" rel="noopener noreferrer">
+                          Visa position
+                        </a>
+                      </li>
+                    );
+                  })}
                 </ul>
               )}
             </li>
@@ -85,7 +96,7 @@ function City() {
       <p>Inga zoner hittades för denna stad.</p>
     )}
 
-    <h3>Avvikande parkering (inte i en zon)</h3>
+    <h3>Avvikande parkering (utanför accepterad zon)</h3>
     {(() => {
       const freeparkedBikes = bikes.filter(bike => !bike.startingzone);
       if (freeparkedBikes.length === 0) {
@@ -93,12 +104,22 @@ function City() {
       }
       return (
         <ul>
-          {freeparkedBikes.map(bike => (
-            //display bikeinfo for freeparkedBikes
-            <li key={bike._id}>
-              ID: {bike._id} | Batteri: {bike.battery}% | Status: {bike.inUse ? 'Uthyrd' : 'Ledig'}
-            </li>
-          ))}
+          {freeparkedBikes.map(bike => {
+            let statusText = bike.inUse ? 'Upptagen' : 'Ledig';
+            if (bike.blocked) statusText = 'Blockad';
+
+             const mapsLink = `https://www.google.com/maps?q=${bike.position.latitude},${bike.position.longitude}`;
+
+            return (
+              <li key={bike._id}>
+                Id: {bike._id} | Batteri: {bike.battery}% | Status: {statusText} |
+                Position: {bike.position.latitude.toFixed(4)}(Y), {bike.position.longitude.toFixed(4)}(X) |
+                 <a href={mapsLink} target="_blank" rel="noopener noreferrer">
+                  Hitta
+                </a>
+              </li>
+            );
+          })}
         </ul>
       );
     })()}

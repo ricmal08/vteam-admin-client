@@ -13,7 +13,6 @@ function CreateCity() {
     event.preventDefault();
     setError(null);
 
-    //skapar objekt som matchar jsonstrukturen enl.backendserverns krav.
     const newCityData = {
       name,
     };
