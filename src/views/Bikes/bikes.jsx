@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-//import { Box, Heading, VStack } from '@chakra-ui/react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -10,23 +9,19 @@ function Bikes() {
   const [bikes, setBikes] = useState([]);
   const [error, setError] = useState(null);
 
-    useEffect(() => {
-      const fetchBikes = async () => {
+  const fetchBikes = async () => {
+    try {
+      const data = await apiRequest('/api/bikes');
+      setBikes(data);
+    } catch (err) {
+      console.error("Ett fel inträffade vid fetch:", err);
+      setError("Kunde inte hämta cyklar.");
+    }
+  };
 
-
-        try {
-
-          const data = await apiRequest('/api/bikes');
-
-          setBikes(data);
-          // TODO: ordna eventuellt fler kontroller
-        } catch (err) {
-          console.error("Ett fel inträffade vid fetch:", err);
-         
-        }
-    };
+  useEffect(() => {
     fetchBikes();
-}, [])
+  }, []);
 
 const handleDelete = async (bikeId) => {
 
@@ -45,11 +40,36 @@ const handleDelete = async (bikeId) => {
         alert(err.message);
       }
   };
+
+  const handleBlock = async (bikeId) => {
+    try {
+        await apiRequest(`/api/bikes/${bikeId}/block`, {
+            method: 'PATCH',
+        });
+        fetchBikes();
+    } catch (err) {
+        setError("Kunde inte blockera fordonet.");
+        console.error("Blockering misslyckades:", err);
+    }
+};
+
+
+const handleUnblock = async (bikeId) => {
+    try {
+        await apiRequest(`/api/bikes/${bikeId}/unblock`, {
+            method: 'PATCH',
+        });
+        fetchBikes();
+    } catch (err) {
+        setError("Kunde inte avblockera fordonet.");
+        console.error("Avblockering misslyckades:", err);
+    }
+};
  return (
 
 <div className="bikes-container">
 
-      <h2 className="bikes-title">Enheter</h2>
+      <h2 className="bikes-title">Cyklar</h2>
        <Link to="/bikes/create" className="bikes-create">
                 + Lägg till
        </Link>
@@ -58,6 +78,13 @@ const handleDelete = async (bikeId) => {
               <thead>
                 <tr>
                   <th>Id</th>
+                  <th>Status</th>
+                  <th>Plats</th>
+                  <th>Position</th>
+                  <th>Batteri</th>
+                  <th>Laddning</th>
+                  <th>Blockad</th>
+                  <th></th>
                   <th>Ändra</th>
                   <th>Ta bort</th>
               </tr>
@@ -66,6 +93,17 @@ const handleDelete = async (bikeId) => {
                 {bikes.map(bike => (
                   <tr key={bike._id}>
                     <td>{bike._id}</td>
+                    <td>{bike.inUse ? 'Uthyrd' : 'Ledig'}</td>
+                    <td>{bike.startingzone ? `Zon: ${bike.startingzone}` : 'Fri parkering'}</td>
+                    <td>{bike.position.latitude.toFixed(4)}(Y),{bike.position.longitude.toFixed(4)}(X)</td>
+                    <td>{bike.battery}</td>
+                    <td>{bike.charging ? 'Laddar': ''}</td>
+                    <td>{bike.blocked ? 'Blockad': ''}</td>
+                    <td> {bike.blocked 
+                      ? <button onClick={() => handleUnblock(bike._id)}>Avblockera</button>
+                      : <button onClick={() => handleBlock(bike._id)}>Blockera</button>
+                    }
+                    </td>
                     <td>
                       <Link to={`/bikes/${bike._id}`}>
                         <button></button>
