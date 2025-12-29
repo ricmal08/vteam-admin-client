@@ -4,6 +4,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import 'leaflet/dist/leaflet.css';
 
 import Login from './views/Login/login.jsx';
 import Userinterface from './components/interface/userinterface.jsx';
@@ -28,6 +29,8 @@ import Cities from './views/Cities/cities.jsx'
 import CreateCity from './views/Cities/createCity.jsx';
 import City from './views/Cities/city.jsx';
 import EditCity from './views/Cities/editCity.jsx';
+
+import Map from './views/Map/map.jsx'
 
 
 
@@ -75,6 +78,9 @@ function App() {
             <Route path="cities/create" element={<CreateCity/>} />
             <Route path="cities/:cityId" element={<City/>} />
             <Route path="cities/:cityId/edit" element={<EditCity />} />
+
+            {/* Map-endpoints */}
+            <Route path="map" element={<Map/>} />
 
 
 
