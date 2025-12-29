@@ -1,4 +1,4 @@
-.units-container {
+.bikes-container {
    border: 1px solid #ccc;
   border-radius: 8px;
   padding: 1.5rem;
@@ -6,7 +6,7 @@
 
 }
 
-.units-title {
+.bikes-title {
   margin-top: 0;
   border-bottom: 2px solid #444;
   padding-bottom: 0.5rem;
