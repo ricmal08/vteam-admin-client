@@ -85,6 +85,7 @@ function Map() {
             Stockholm
           </Popup>
         </Marker>
+
         {zones.map(zone => (
             <Polygon
             key={zone._id}
