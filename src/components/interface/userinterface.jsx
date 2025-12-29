@@ -8,6 +8,7 @@ function Userinterface() {
       <nav className="nav-menu">
         <h2 className="nav-title">Admin-Client</h2>
         <h3> Innehåll: </h3>
+        <RouterLink className="nav-link" to="/login">Logga in</RouterLink>
         <RouterLink className="nav-link" to="/">Översikt</RouterLink>
         <RouterLink className="nav-link" to="/overview">Användare</RouterLink>
         {/*<RouterLink className="nav-link" to="/admins">Administratörer</RouterLink>*/ }

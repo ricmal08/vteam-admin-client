@@ -12,13 +12,13 @@ COPY . .
 # bygg-skript
 RUN npm run build
 
-# Prod-miljön
+# Prod-miljö
 FROM nginx:stable-alpine
 
 # Rensa överflödiga filer i Nginx
 RUN rm -rf /usr/share/nginx/html/*
 
-# Vite lägger resultatet i en mapp som heter 'dist'
+# Vite lagrar resultatet i en mapp'dist'
 COPY --from=build /app/dist /usr/share/nginx/html
 
 # Nginx lyssnar på port 80

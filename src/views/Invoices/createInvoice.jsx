@@ -1,26 +1,38 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../config';
+import { apiRequest } from '../../api/api.js';
 
 function CreateInvoice() {
   const [userId, setUserId] = useState('');
   const [amount, setAmount] = useState('');
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
 const handleSubmit = async (event) => {
   event.preventDefault();
-  const newInvoiceData = { userId, amount };
 
+  //har hårdkodat in startTime, startPosition och endPosition för att formatet ska matcha det backendservern väntar sig.
+  const newInvoiceData = { 
+        userId: userId, 
+        amount: parseFloat(amount),
+        startTime: new Date().toISOString(),
+        startPosition: { lat: 0, lon: 0 },
+        endPosition: { lat: 0, lon: 0 },
+  }
+  //console.log(newInvoiceData);
   try {
-    const response = await fetch(`${API_URL}/api/invoices`, {
+    await apiRequest('/api/invoices', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
       body: JSON.stringify(newInvoiceData),
     });
 
-  } catch (err) {}
+    navigate('/invoices'); 
+
+  } catch (err) {
+    console.error("Fel vid borttagning:", err);
+    alert(err.message);
+  }
 };
 
 return (

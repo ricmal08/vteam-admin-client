@@ -3,9 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-//import { API_URL } from './config.js';
 import './App.css'
 
+import Login from './views/Login/login.jsx';
 import Userinterface from './components/interface/userinterface.jsx';
 import Accounts from './views/Accounts/accounts.jsx';
 import Units from './views/Units/units.jsx';
@@ -13,15 +13,17 @@ import Units from './views/Units/units.jsx';
 import Invoices from './views/Invoices/invoices.jsx'
 import Invoice from './views/Invoices/invoice.jsx'
 import CreateInvoice from './views/Invoices/createInvoice.jsx';
-//const API_URL = "http://localhost:5173"
-//const API_URL = "http://localhost:3000"
 
 function App() {
   const [count, setCount] = useState(0)
+  const [token, setToken] = useState(localStorage.getItem('accessToken'));
 
   return (
      <BrowserRouter>
       <Routes>
+
+
+        <Route path="/login" element={<Login setToken={setToken} />} />
        
         <Route path="/" element={<Userinterface />}>
 
@@ -34,8 +36,9 @@ function App() {
 
           {/* Invoices-endpoints */}
           <Route path="invoices" element={<Invoices/>} />
-          <Route path="invoices/:invoiceId" element={<Invoice />} />
           <Route path="invoices/create" element={<CreateInvoice/>} />
+          <Route path="invoices/:invoiceId" element={<Invoice />} />
+          
 
           <Route path="overview" element={<Accounts/>} />
 

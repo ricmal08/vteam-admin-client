@@ -4,24 +4,21 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'; 
 import './invoices.css';
 import { API_URL } from "../../config.js"
+import { apiRequest } from '../../api/api.js';
 
 function Invoices() {
   const [invoices, setInvoices] = useState([]);
+  const [error, setError] = useState(null);
 
      useEffect(() => {
       const fetchInvoices = async () => {
 
       try {
 
-          const response = await fetch(`${API_URL}/api/invoices`);
-
-          if (!response.ok) {
-          throw new Error(`Något gick fel, status: ${response.status}.`);
-        }
-
-        const data = await response.json();
-        setInvoices(data);
-          // TODO: ordna eventuellt fler kontroller
+          const data = await apiRequest('/api/invoices');
+          console.log("Mottagen data från /api/invoices:", data); 
+          setInvoices(data);
+            // TODO: ordna eventuellt fler kontroller
         } catch (err) {
           console.error("Ett fel inträffade vid fetch:", err);
          
@@ -33,23 +30,20 @@ function Invoices() {
  const handleDelete = async (invoiceId) => {
 
       try {
-      const response = await fetch(`${API_URL}/api/invoices/${invoiceId}`, {
-        method: 'DELETE',
-      });
 
-      if (!response.ok) {
-        throw new Error(`Kunde inte ta bort fakturan. Status: ${response.status}`);
+        await apiRequest(`/api/invoices/${invoiceId}`, {
+              method: 'DELETE',
+        });
+
+        setInvoices(currentInvoices => 
+            currentInvoices.filter(invoice => invoice._id !== invoiceId)
+        );
+
+      } catch (err) {
+        console.error("Fel vid borttagning:", err);
+        //TODO: felhantering
+        alert(err.message);
       }
-
-      setInvoices(currentInvoices => 
-        currentInvoices.filter(invoice => invoice._id !== invoiceId)
-      );
-
-    } catch (err) {
-      console.error("Fel vid borttagning:", err);
-      //TODO: felhantering
-      alert(err.message);
-    }
 
   };
  return (
