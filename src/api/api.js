@@ -24,12 +24,15 @@ async function apiRequest(endpoint, options = {}) {
     });
 
     if (!response.ok) {
+      const errorData = await response.json(); 
+    
+      const errorMessage = errorData.message || `Nätverksfel, status: ${response.status}`;
 
-      if (response.status === 401 || response.status === 403) {
+      if (response.status === 401) {
         localStorage.removeItem('accessToken'); // Ta bort den felaktig token ur localstorage
         window.location.href = '/login'; // Tvinga omdirigering.
       }
-      throw new Error(`Nätverksfel, status: ${response.status}`);
+      throw new Error(`Nätverksfel, status: ${errorMessage}`);
     }
 
     return response.json();
