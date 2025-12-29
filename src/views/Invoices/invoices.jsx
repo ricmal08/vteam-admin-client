@@ -16,9 +16,7 @@ function Invoices() {
       try {
 
           const data = await apiRequest('/api/invoices');
-          console.log("Mottagen data från /api/invoices:", data); 
           setInvoices(data);
-            // TODO: ordna eventuellt fler kontroller
         } catch (err) {
           console.error("Ett fel inträffade vid fetch:", err);
          
@@ -41,7 +39,6 @@ function Invoices() {
 
       } catch (err) {
         console.error("Fel vid borttagning:", err);
-        //TODO: felhantering
         alert(err.message);
       }
 
@@ -51,10 +48,10 @@ function Invoices() {
 <div className="invoices-container">
 
       <h2 className="invoices-title">Fakturor</h2>
-      <Link to="/invoices/create" className="invoices-create">
+      {/*This should not be included in prod*/}
+      {/*<Link to="/invoices/create" className="invoices-create">
         + Skapa faktura
-      </Link>
-
+      </Link>*/}
       {invoices.length > 0 ? (
       <table className={invoices.dataTable}>
         <thead>
@@ -62,6 +59,7 @@ function Invoices() {
             <th>Fakturnummer</th>
             <th>Kundnummer</th>
             <th>Datum</th>
+            <th>Status</th>
             <th>Belopp</th>
             <th>Ta bort</th>
           </tr>
@@ -75,6 +73,7 @@ function Invoices() {
                 </Link></td>
               <td>{invoice.userId}</td>
               <td>{new Date(invoice.date).toLocaleDateString("sv-SE")}</td>
+              <td>{invoice.paid ? 'Betald' : 'Obetald'}</td>
               <td>{invoice.amount} kr</td>
               <td>
               <button 
