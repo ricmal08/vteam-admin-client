@@ -25,7 +25,7 @@ function Admins() {
           setAdmins(data);
         } catch (err) {
           console.error("Ett fel inträffade vid fetch:", err);
-         
+
         }
     };
     fetchAdmins();
@@ -47,14 +47,14 @@ const handleDelete = async (adminEmail) => {
         alert(err.message);
       }
   };
- return (
+return (
 
 <div className="admins-container">
 
       <h2 className="admins-title">Administratörer</h2>
-       <Link to="/admins/create" className="admins-create">
-                + Lägg till
-       </Link>
+      <Link to="/admins/create" className="admins-create">
+              + Lägg till
+      </Link>
       {admins.length > 0 ? (
             <table className={admins.dataTable}>
               <thead>
@@ -71,7 +71,7 @@ const handleDelete = async (adminEmail) => {
                     {isSuperAdmin && <td>{admin.role}</td>}
                     <td>{admin.id}</td>
                     <td>{admin.email}</td>
-                     <td>
+                    <td>
                       <button onClick={() => handleDelete(admin.email)}>
                         Ta bort
                       </button>

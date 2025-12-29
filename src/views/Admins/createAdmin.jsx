@@ -14,18 +14,17 @@ function CreateAdmin() {
     event.preventDefault();
     setError(null);
 
-    //skapar objekt som matchar jsonstrukturen enl.backendserverns krav.
     const newAdminData = {
-      email,
-      password,
-      role
+    email,
+    password,
+    role
     };
-    console.log(newAdminData);
+    //console.log(newAdminData);
     try {
         await apiRequest('/api/admins', {
         method: 'POST',
         body: JSON.stringify(newAdminData),
-      });
+    });
 
         navigate('/admins'); 
 
@@ -37,8 +36,8 @@ function CreateAdmin() {
 
 return (
     <form onSubmit={handleSubmit}>
-      <h2>Skapa ny administratör</h2>
-         <div>
+    <h2>Skapa ny administratör</h2>
+        <div>
             <label htmlFor="email">E-post:</label>
             <input
                 id="email"
@@ -70,7 +69,7 @@ return (
         </div>
         <button type="submit">Spara</button>
     </form>
-  );
+);
 }
 
 export default CreateAdmin
