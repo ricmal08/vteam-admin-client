@@ -1,0 +1,55 @@
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import './account.css';
+import { apiRequest } from '../../api/api.js';
+
+function User() {
+  const{userId} = useParams();
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
+
+    useEffect(() => {
+
+      if(!userId) return
+
+      const fetchUser = async () => {
+
+      try {
+
+        const data = await apiRequest(`/api/users/${userId}`);
+        setUser(data);
+        } catch (err) {
+          console.error("Ett fel inträffade vid fetch:", err);
+
+        }
+    };
+    fetchUser();
+}, [userId])
+
+ if (!user) {
+    return <div>Hittar ingen kund med angivet kundnummer.</div>;
+  }
+ return (
+
+    <div className="user-container">
+        <h2 className="user-title">Översikt:</h2>
+          <Link to={`/users/${userId}/edit`}>
+          <button>Redigera användare</button>
+          </Link>
+          <div className="user-details">
+          <p><strong>Kundnummer:</strong> {user._id}</p>
+          <p><strong>Förnamn:</strong> {user.firstName}</p>
+          <p><strong>Efternamn:</strong> {user.lastName}</p>    
+          <p><strong>Adress:</strong> {user.city}</p>    
+          <p><strong>Postnummer:</strong> {user.street}</p>    
+          <p><strong>Stad:</strong> {user.zipCode}</p>
+          <p><strong>E-post:</strong> {user.email}</p>       
+          </div>
+    </div>
+
+);
+}
+
+export default User;
