@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiRequest } from '../../api/api.js';
+import './admin.css';
 
 function CreateAdmin() {
     const [email, setEmail] = useState('');
@@ -35,40 +36,43 @@ function CreateAdmin() {
 };
 
 return (
-    <form onSubmit={handleSubmit}>
-    <h2>Skapa ny administratör</h2>
-        <div>
-            <label htmlFor="email">E-post:</label>
-            <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                required
-            />
-        </div>
-        <div>
-            <label htmlFor="role">Roll:</label>
-            <input
-                id="role"
-                type="text"
-                value={role}
-                onChange={e => setRole(e.target.value)}
-                required
-            />
-        </div>
-        <div>
-            <label htmlFor="password">Lösenord:</label>
-            <input
-                id="password"
-                type="text"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                required
-            />
-        </div>
-        <button type="submit">Spara</button>
-    </form>
+    <div className="admin-container">
+        <h2 className="admin-title">Översikt:</h2>
+        <form onSubmit={handleSubmit}>
+            <h2>Skapa ny administratör</h2>
+                <div>
+                    <label htmlFor="email">E-post:</label>
+                    <input
+                        id="email"
+                        type="email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor="role">Roll:</label>
+                    <input
+                        id="role"
+                        type="text"
+                        value={role}
+                        onChange={e => setRole(e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor="password">Lösenord:</label>
+                    <input
+                        id="password"
+                        type="text"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                <button type="submit">Spara</button>
+        </form>
+    </div>
 );
 }
 

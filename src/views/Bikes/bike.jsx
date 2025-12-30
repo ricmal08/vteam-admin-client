@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { apiRequest } from '../../api/api.js';
+import { Link } from 'react-router-dom';
+import './bike.css';
 
 function EditBike() { 
 
@@ -77,7 +79,7 @@ function EditBike() {
 
   return (
     <div className="bikes-container">
-      <h2 className="bikes-title">Redigera Cykel: {bikeId} </h2>
+      <h2 className="bike-title">Översikt:</h2>
 
         <div className="bike-details">
         <h3>Status & Information</h3>
@@ -105,18 +107,6 @@ function EditBike() {
             ))}
             </select>
         </div>
-
-        <div>
-          <label>
-            <input 
-              type="checkbox"
-              checked={isBlocked}
-              onChange={e => setIsBlocked(e.target.checked)}
-            />
-            Blockerad (för service etc.)
-          </label>
-        </div>
-
           <button type="submit">Spara</button>
         </form>
     </div>

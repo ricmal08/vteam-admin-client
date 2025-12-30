@@ -22,7 +22,7 @@ function User() {
         setUser(data);
         } catch (err) {
           console.error("Ett fel inträffade vid fetch:", err);
-         
+
         }
     };
     fetchUser();
@@ -34,7 +34,7 @@ function User() {
  return (
 
     <div className="user-container">
-        <h2 className="user-title">Info:</h2>
+        <h2 className="user-title">Översikt:</h2>
           <Link to={`/users/${userId}/edit`}>
           <button>Redigera användare</button>
           </Link>

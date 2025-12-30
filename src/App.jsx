@@ -17,7 +17,7 @@ import EditUser from './views/Accounts/editUser.jsx';
 
 import Bikes from './views/Bikes/bikes.jsx';
 import CreateBike from './views/Bikes/createBike.jsx';
-import EditBike from './views/Bikes/editBike.jsx';
+import Bike from './views/Bikes/bike.jsx';
 
 import Admins from './views/Admins/admins.jsx';
 import CreateAdmin from './views/Admins/createAdmin.jsx';
@@ -58,7 +58,7 @@ function App() {
               {/* Bikes-endpoints */}
               <Route path="bikes" element={<Bikes/>} />
               <Route path="bikes/create" element={<CreateBike/>} />
-              <Route path="bikes/:bikeId" element={<EditBike />} />
+              <Route path="bikes/:bikeId" element={<Bike />} />
 
               {/* Invoices-endpoints */}
               <Route path="invoices" element={<Invoices/>} />

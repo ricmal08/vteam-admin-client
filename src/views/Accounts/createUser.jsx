@@ -33,27 +33,34 @@ function CreateUser() {
 };
 
 return (
-    <form onSubmit={handleSubmit}>
-      <h2>Skapa ny användare</h2>
-      <label>
-        E-post:
-        <input 
-          type="text" 
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-        />
-      </label>
-      <label>
-        Lösenord:
-        <input 
-          type="text" 
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <button type="submit">Spara</button>
-    </form>
+    <div className="user-container">
+        <h2 className="user-title">Översikt:</h2>
+        <form onSubmit={handleSubmit}>
+          <h2>Skapa ny användare</h2>
+          <div>
+          <label>
+            E-post:
+            <input 
+              type="text" 
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+          </label>
+          </div>
+          <div>
+          <label>
+            Lösenord:
+            <input 
+              type="text" 
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+            />
+          </label>
+          </div>
+          <button type="submit">Spara</button>
+        </form>
+    </div>
   );
 }
 

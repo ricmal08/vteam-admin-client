@@ -35,6 +35,7 @@ function Map() {
         try {
         const bikesData = await apiRequest('/api/bikes');
         setBikes(bikesData);
+        console.log('cykeldata:', bikesData)
         } catch (err) {
         setBikesError("Kunde inte hämta cykeldata.");
         console.error("Fel vid hämtning av cyklar för kartan:", err);
@@ -51,9 +52,10 @@ function Map() {
 
             const zonesData = await apiRequest('/api/zones');
             setZones(zonesData);
+            console.log('zondata:', zonesData)
         } catch (err) {
           
-             setZonesError("Kunde inte hämta zondata.");
+            setZonesError("Kunde inte hämta zondata.");
             console.error("Fel vid hämtning av zoner för kartan:", err);
         } finally {
             setIsLoadingZones(false);
@@ -79,12 +81,7 @@ function Map() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-     
-         <Marker position={initialPosition}>
-          <Popup>
-            Stockholm
-          </Popup>
-        </Marker>
+
 
         {zones.map(zone => (
             <Polygon

@@ -13,37 +13,38 @@ function Accounts() {
       const fetchUsers = async () => {
 
 
-        try {
+    try {
 
-          const data = await apiRequest('/api/users');
+      const data = await apiRequest('/api/users');
 
-          setUsers(data);
-        } catch (err) {
-          console.error("Ett fel inträffade vid fetch:", err);
-         
-        }
+      setUsers(data);
+      console.log('användardata:', data)
+    } catch (err) {
+      console.error("Ett fel inträffade vid fetch:", err);
+      
+    }
     };
     fetchUsers();
 }, [])
 
 const handleDelete = async (userId) => {
 
-      try {
+    try {
 
-        await apiRequest(`/api/users/${userId}`, {
-              method: 'DELETE',
-        });
+      await apiRequest(`/api/users/${userId}`, {
+            method: 'DELETE',
+      });
 
-        setUsers(currentUsers => 
-            currentUsers.filter(user => user._id !== userId)
-        );
+      setUsers(currentUsers => 
+          currentUsers.filter(user => user._id !== userId)
+      );
 
-      } catch (err) {
-        console.error("Fel vid borttagning:", err);
-        alert(err.message);
-      }
-  };
- return (
+    } catch (err) {
+      console.error("Fel vid borttagning:", err);
+      alert(err.message);
+    }
+};
+return (
 
 <div className="accounts-container">
 
@@ -56,22 +57,21 @@ const handleDelete = async (userId) => {
       <table className={users.dataTable}>
         <thead>
           <tr>
-            <th>E-post</th>
             <th>Kundnummer</th>
-            <th>Ändra</th>
+            <th>E-post</th>
+            <th>Saldo</th>
             <th>Ta bort</th>
         </tr>
       </thead>
       <tbody>
           {users.map(user => (
             <tr key={user.email}>
+              <td><Link
+                  to={`/users/${user._id}`}>
+                  {user._id}
+                </Link></td>
               <td>{user.email}</td>
-              <td>{user._id}</td>
-              <td>
-                <Link to={`/users/${user._id}`}>
-                  <button></button>
-                </Link>
-              </td>
+              <td>{user.balance}</td>
               <td>
               <button 
                   onClick={() => handleDelete(user._id)} >

@@ -52,7 +52,7 @@ function City() {
 
 return (
   <div className="city-container">
-    <h2>{city.name}</h2>
+    <h2 className="user-title">{city.name}</h2>
     <p><strong>Totalt antal cyklar i staden:</strong> {bikes.length}</p>
       
     <h3>Laddstationer & Zoner</h3>

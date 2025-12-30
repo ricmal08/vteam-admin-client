@@ -48,10 +48,6 @@ return (
                       <Link to={`/cities/${city._id}`}>{city.name}</Link>
                   </td>
                   <td>{city.zones ? city.zones.length : 0}</td>
-                  <td>
-                    {/* reference link to map-view (map.jsx)?*/}
-                      <button>Visa på karta</button>
-                  </td>
                   </tr>
               ))}
               </tbody>

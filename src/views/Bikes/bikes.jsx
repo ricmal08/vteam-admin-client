@@ -14,7 +14,7 @@ function Bikes() {
       const data = await apiRequest('/api/bikes');
       setBikes(data);
     } catch (err) {
-      console.error("Ett fel inträffade vid fetch:", err);
+      console.error("Ett fel inträffade vid hämtning:", err);
       setError("Kunde inte hämta cyklar.");
     }
   };
@@ -85,29 +85,26 @@ const handleUnblock = async (bikeId) => {
                   <th>Laddning</th>
                   <th>Blockad</th>
                   <th></th>
-                  <th>Ändra</th>
                   <th>Ta bort</th>
               </tr>
             </thead>
             <tbody>
                 {bikes.map(bike => (
                   <tr key={bike._id}>
-                    <td>{bike._id}</td>
+                    <td><Link
+                        to={`/bikes/${bike._id}`}>
+                        {bike._id}
+                      </Link></td>
                     <td>{bike.inUse ? 'Uthyrd' : 'Ledig'}</td>
                     <td>{bike.startingzone ? `Zon: ${bike.startingzone}` : 'Fri parkering'}</td>
                     <td>{bike.position.latitude.toFixed(4)}(Y),{bike.position.longitude.toFixed(4)}(X)</td>
-                    <td>{bike.battery}</td>
+                    <td>{bike.battery}%</td>
                     <td>{bike.charging ? 'Laddar': ''}</td>
                     <td>{bike.blocked ? 'Blockad': ''}</td>
                     <td> {bike.blocked 
                       ? <button onClick={() => handleUnblock(bike._id)}>Avblockera</button>
                       : <button onClick={() => handleBlock(bike._id)}>Blockera</button>
                     }
-                    </td>
-                    <td>
-                      <Link to={`/bikes/${bike._id}`}>
-                        <button></button>
-                      </Link>
                     </td>
                     <td>
                     <button 

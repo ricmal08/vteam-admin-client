@@ -14,9 +14,9 @@ function Userinterface(currentUser) {
 return (
   <div className="layout-container">
     <nav className="nav-menu">
-      <h2 className="nav-title">Admin-Client</h2>
+      <h2 className="nav-title">Adminwebb</h2>
           <button onClick={handleLogout} className="logout-button">Logga ut</button>
-      <h3> Innehåll: </h3>
+      <h3> Meny: </h3>
 
     {!currentUser && (
     <RouterLink className="nav-link" to="/login">Logga in</RouterLink>

@@ -93,7 +93,6 @@ return (
                     <td>Parkeringsavgift (fri parkering):</td>
                     <td>{parkingFee.toFixed(2)} kr</td>
                 </tr>
-                {/* requrires invoice.discount from backend */}
                 {discount > 0 && (
                 <tr>
                     <td>Rabatt:</td>
