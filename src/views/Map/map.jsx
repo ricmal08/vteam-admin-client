@@ -6,7 +6,7 @@ import { apiRequest } from '../../api/api.js';
 import './map.css';
 
 const bikeIcon = new L.Icon({
-  iconUrl: '/images/scooter.jpg',
+  iconUrl: '/images/scooter2.png',
   iconSize: [40, 40],
 });
 
@@ -70,7 +70,7 @@ function Map() {
   }
 
   return (
-    //Display default marker for Stockholm
+
     <div className="map-container">
         <h2 className="map-title">Kartvy</h2>
       {bikesError && <p style={{ color: 'red', textAlign: 'center' }}>{bikesError}</p>}
