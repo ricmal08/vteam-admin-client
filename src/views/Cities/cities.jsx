@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './cities.css';
 import { apiRequest } from '../../api/api.js';
@@ -29,10 +27,10 @@ function Cities() {
 
 return (
 
-<div className="cities-container">
+  <div className="cities-container">
 
-  <h2 className="cities-title">Städer</h2>
-    {cities.length > 0 ? (
+    <h2 className="cities-title">Städer</h2>
+      {cities.length > 0 ? (
           <table className={cities.dataTable}>
             <thead>
               <tr>
@@ -56,7 +54,7 @@ return (
             <p>Inga städer kunde hittas.</p>
           )}
   </div>
-  );
+);
 }
 
 export default Cities;

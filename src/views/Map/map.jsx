@@ -12,23 +12,23 @@ const bikeIcon = new L.Icon({
 
 
 const zoneOptions = {
-    parking: { color: 'blue', fillOpacity: 0.2 },
-    charging: { color: 'green', fillOpacity: 0.2 },
-    'no-parking': { color: 'red', fillOpacity: 0.2 },
-    default: { color: 'grey', fillOpacity: 0.2 }
+  parking: { color: 'blue', fillOpacity: 0.2 },
+  charging: { color: 'green', fillOpacity: 0.2 },
+  'no-parking': { color: 'red', fillOpacity: 0.2 },
+  default: { color: 'grey', fillOpacity: 0.2 }
 };
 
 function Map() {
 
-    const initialPosition = [59.3293, 18.0686]; 
+  const initialPosition = [59.3293, 18.0686]; 
 
-    const [bikes, setBikes] = useState([]);
-    const [zones, setZones] = useState([]);
-    const [isLoadingBikes, setIsLoadingBikes] = useState(true);
-    const [isLoadingZones, setIsLoadingZones] = useState(true);
+  const [bikes, setBikes] = useState([]);
+  const [zones, setZones] = useState([]);
+  const [isLoadingBikes, setIsLoadingBikes] = useState(true);
+  const [isLoadingZones, setIsLoadingZones] = useState(true);
 
-    const [bikesError, setBikesError] = useState(null);
-    const [zonesError, setZonesError] = useState(null);
+  const [bikesError, setBikesError] = useState(null);
+  const [zonesError, setZonesError] = useState(null);
 
   useEffect(() => {
     const fetchBikes = async () => {
@@ -50,9 +50,9 @@ function Map() {
     const fetchZones = async () => {
         try {
 
-            const zonesData = await apiRequest('/api/zones');
-            setZones(zonesData);
-            console.log('zondata:', zonesData)
+          const zonesData = await apiRequest('/api/zones');
+          setZones(zonesData);
+          console.log('zondata:', zonesData)
         } catch (err) {
           
             setZonesError("Kunde inte hämta zondata.");
@@ -108,7 +108,6 @@ function Map() {
                 <strong>Id:</strong> {bike._id} <br />
                 <strong>Batteri:</strong> {bike.battery}% <br />
                 <strong>Status:</strong> {bike.inUse ? 'Uthyrd' : 'Ledig'} <br />
-                <strong>Zon:</strong> {bike.startingzone || 'Ingen (fri parkering)'}
             </Popup>
             </Marker>
         ))}

@@ -14,13 +14,13 @@ const handleSubmit = async (event) => {
 
   //har hårdkodat in startTime, startPosition och endPosition för att formatet ska matcha det backendservern väntar sig.
   const newInvoiceData = { 
-        userId: userId, 
-        amount: parseFloat(amount),
-        startTime: new Date().toISOString(),
-        startPosition: { lat: 0, lon: 0 },
-        endPosition: { lat: 0, lon: 0 },
+      userId: userId,
+      startTime: new Date(Date.now() - 10 * 60000).toISOString(),
+      customDebit: 0, 
+      startPosition: { latitude: 0, longitude: 0 },
+      endPosition: { latitude: 0, longitude: 0 },
   }
-  //console.log(newInvoiceData);
+
   try {
     await apiRequest('/api/invoices', {
       method: 'POST',
@@ -36,26 +36,34 @@ const handleSubmit = async (event) => {
 };
 
 return (
-    <form onSubmit={handleSubmit}>
-      <h2>Skapa ny faktura</h2>
-      <label>
-        Kundnummer:
-        <input 
-          type="text" 
-          value={userId}
-          onChange={e => setUserId(e.target.value)}
-        />
-      </label>
-      <label>
-        Belopp:
-        <input 
-          type="number" 
-          value={amount}
-          onChange={e => setAmount(e.target.value)}
-        />
-      </label>
-      <button type="submit">Spara</button>
-    </form>
+  <div className="form-container">
+    <h2>Skapa faktura</h2>
+
+      <form onSubmit={handleSubmit} className="form-layout">
+        <div className="form-group">
+          <label>
+            Kundnummer:
+            <input 
+              type="text" 
+              value={userId}
+              onChange={e => setUserId(e.target.value)}
+            />
+          </label>
+        </div>
+
+        <div className="form-group">
+          <label>
+            Belopp:
+            <input 
+              type="number" 
+              value={amount}
+              onChange={e => setAmount(e.target.value)}
+            />
+          </label>
+        <button type="submit" className="form-button">Spara</button>
+        </div>
+      </form>
+  </div>
   );
 }
 

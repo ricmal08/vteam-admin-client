@@ -47,68 +47,96 @@ function City() {
   }, [cityId]);
 
   if (!city) {
-    return <div>Hittar ingen stad med angivet ID.</div>;
+    return <div>Hittar ingen stad med angivet Id.</div>;
   }
 
 return (
   <div className="city-container">
-    <h2 className="user-title">{city.name}</h2>
-    <p><strong>Totalt antal cyklar i staden:</strong> {bikes.length}</p>
+    <h2 className="city-title">{city.name}</h2>
+    <p><strong>Totalt antal cyklar i staden:</strong> {bikes.length} st</p>
       
     <h3>Laddstationer & Zoner</h3>
-      {zones.length > 0 ? (
-        <ul>
+    {zones.length > 0 ? (
+      <table className="data-table">
+        <thead>
+          <tr>
+            <th>Zon</th>
+            <th>Cyklar i Zonen</th>
+          </tr>
+        </thead>
+        <tbody>
           {zones.map(zone => {
             const bikesInZone = bikes.filter(bike => bike.startingzone === zone._id);
-          
+            
             return (
-              <li key={zone._id}>
-                <strong>{zone.name}</strong> (Typ: {zone.typeOfZone}, Antal cyklar: {bikesInZone.length})
-                
-                {bikesInZone.length > 0 && (
-                  <ul>
-                    {bikesInZone.map(bike => (
-                      //Dispay bike info
-                      <li key={bike._id}>
-                        ID: {bike._id} | Batteri: {bike.battery}% | Status: {bike.inUse ? 'Uthyrd' : 'Ledig'}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
+              <tr key={zone._id}>
+                <td>
+                  <strong>{zone.name}</strong><br />
+                  <small>Typ: {zone.typeOfZone}</small>
+                </td>
+
+                <td>
+                  {bikesInZone.length > 0 ? (
+                    <ul>
+                      {bikesInZone.map(bike => {
+                        let statusText = bike.inUse ? 'Uthyrd' : 'Ledig';
+                        if (bike.blocked) statusText = 'Blockerad';
+                        if (bike.charging) statusText = 'Laddar';
+                        return (
+                          <li key={bike._id}>
+                            Id: {bike._id} | Batteri: {bike.battery}% | Status: {statusText}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  ) : (
+                    <p>0 st</p>
+                  )}
+                </td>
+              </tr>
             );
-        })}
-      </ul>
+          })}
+        </tbody>
+      </table>
     ) : (
-      <p>Inga zoner hittades för denna stad.</p>
+      <p>Inga zoner hittades.</p>
     )}
 
     <h3>Avvikande parkering (utanför accepterad zon)</h3>
     {(() => {
-      const freeparkedBikes = bikes.filter(bike => !bike.startingzone);
-      if (freeparkedBikes.length === 0) {
-        return <p>Inga cyklar med avvikande parkering hittades.</p>;
-      }
-      return (
-        <ul>
-            {freeparkedBikes.map(bike => {
-            let statusText = bike.inUse ? 'Upptagen' : 'Ledig';
-            if (bike.blocked) statusText = 'Blockad';
+        const freeparkedBikes = bikes.filter(bike => !bike.startingzone);
 
-            const mapsLink = `https://www.google.com/maps?q=${bike.position.latitude},${bike.position.longitude}`;
+        if (freeparkedBikes.length === 0) {
+            return <p>Inga cyklar med avvikande parkering hittades.</p>;
+        }
 
-            return (
-              <li key={bike._id}>
-                Id: {bike._id} | Batteri: {bike.battery}% | Status: {statusText} |
-                Position: {bike.position.latitude.toFixed(4)}(Y), {bike.position.longitude.toFixed(4)}(X) |
-                <a href={mapsLink} target="_blank" rel="noopener noreferrer">
-                  Hitta
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      );
+        return (
+            <table className="data-table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Status</th>
+                        <th>Batteri</th>
+                        <th>Position</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {freeparkedBikes.map(bike => {
+                        let statusText = bike.inUse ? 'Uthyrd' : 'Ledig';
+                        if (bike.blocked) statusText = 'Blockerad';
+
+                        return (
+                            <tr key={bike._id}>
+                                <td>{bike._id}</td>
+                                <td>{statusText}</td>
+                                <td>{bike.battery}%</td>
+                                <td>{bike.position.latitude.toFixed(4)}, {bike.position.longitude.toFixed(4)}</td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+        );
     })()}
   </div>
 );

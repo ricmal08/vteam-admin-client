@@ -17,7 +17,6 @@ body {
   flex-shrink: 0;
   background-color: #2d2d2d;
   padding: 1.5rem;
-  border-right: 1px solid #444;
 }
 
 .nav-title {
@@ -48,12 +47,4 @@ body {
   display: flex;
   padding: 1.5rem;
   overflow-y: auto;
-}
-
-.layout-searchbar {
-  flex-basis: 300px;
-  flex-shrink: 0;
-  background-color: #2d2d2d;
-  padding: 1.5rem;
-  border-left: 1px solid #444;
 }

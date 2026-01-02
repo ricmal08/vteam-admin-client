@@ -1,7 +1,9 @@
 .bikes-container {
-   border: 1px solid #ccc;
+  border-top: 2px solid #444;
+  border: 1px solid #ccc;
   border-radius: 8px;
   padding: 1.5rem;
+  align-self: flex-start;
   background-color: #2d2d2d;
 
 }

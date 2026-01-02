@@ -48,10 +48,9 @@ function Invoices() {
 <div className="invoices-container">
 
       <h2 className="invoices-title">Fakturor</h2>
-      {/*This should not be included in prod*/}
-      {/*<Link to="/invoices/create" className="invoices-create">
-        + Skapa faktura
-      </Link>*/}
+      <Link to="/invoices/create" className="button-link">
+        Skapa faktura
+      </Link>
       {invoices.length > 0 ? (
       <table className={invoices.dataTable}>
         <thead>

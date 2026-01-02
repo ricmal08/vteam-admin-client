@@ -1,9 +1,12 @@
 .invoice-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 1.5rem;
-  background-color: #faf7f7;
-  color: black;
+  align-self: flex-start;
 }
 
 .invoice-title {
@@ -13,11 +16,25 @@
   margin-bottom: 1.5rem;
   color: black;
 }
+.invoice-group {
+  background-color: #faf7f7;
+  width: 80%;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
 
 .invoice-container p{
   color: black;
 }
 
+.invoice-details {
+
+  text-align: left;
+  margin-top: 2.5rem;
+}
 
 .invoice-details p {
   text-align: left;
