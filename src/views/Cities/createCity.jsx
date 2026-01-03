@@ -3,38 +3,38 @@ import { useNavigate } from 'react-router-dom';
 import { apiRequest } from '../../api/api.js';
 
 function CreateCity() {
-    const [name, setName] = useState('');
-    const [zones, setZones] = useState('');
-    const [error, setError] = useState(null);
+  const [name, setName] = useState('');
+  const [zones, setZones] = useState('');
+  const [error, setError] = useState(null);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleSubmit = async (event) => {
-    event.preventDefault();
-    setError(null);
+  const handleSubmit = async (event) => {
+  event.preventDefault();
+  setError(null);
 
-    const newCityData = {
-      name,
-    };
-    console.log(newCityData);
-    try {
-        await apiRequest('/api/cities', {
-        method: 'POST',
-        body: JSON.stringify(newCityData),
-      });
+  const newCityData = {
+    name,
+  };
+  console.log(newCityData);
+  try {
+      await apiRequest('/api/cities', {
+      method: 'POST',
+      body: JSON.stringify(newCityData),
+    });
 
-        navigate('/cities'); 
+      navigate('/cities'); 
 
-    } catch (err) {
-        console.error("Fel vid borttagning:", err);
-        alert(err.message);
-    }
+  } catch (err) {
+      console.error("Fel vid borttagning:", err);
+      alert(err.message);
+  }
 };
 
 return (
     <form onSubmit={handleSubmit}>
       <h2>Lägg till Stad</h2>
-         <div>
+        <div>
             <label htmlFor="name">Namn:</label>
             <input
                 id="name"

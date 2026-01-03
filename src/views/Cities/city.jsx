@@ -16,18 +16,18 @@ function City() {
 
     const fetchCity = async () => {
 
-    try {
+      try {
 
-      const data = await apiRequest(`/api/cities/${cityId}`);
-      setCity(data);
+        const data = await apiRequest(`/api/cities/${cityId}`);
+        setCity(data);
 
-      } catch (err) {
-        console.error("Ett fel inträffade vid fetch:", err);
+        } catch (err) {
+          console.error("Ett fel inträffade vid fetch:", err);
 
-      }
-  };
-  fetchCity();
-}, [cityId])
+        }
+    };
+    fetchCity();
+  }, [cityId])
 
   useEffect(() => {
       const fetchZones = async () => {
@@ -51,16 +51,16 @@ function City() {
   }
 
 return (
-  <div className="city-container">
-    <h2 className="city-title">{city.name}</h2>
-    <p><strong>Totalt antal cyklar i staden:</strong> {bikes.length} st</p>
+  <div className="view-container">
+    <h2>{city.name}</h2>
+    <h4>Totalt antal cyklar i staden: {bikes.length} st</h4>
       
-    <h3>Laddstationer & Zoner</h3>
+    <h3>Zoner</h3>
     {zones.length > 0 ? (
-      <table className="data-table">
+      <table className="form-container">
         <thead>
           <tr>
-            <th>Zon</th>
+            <th>Namn</th>
             <th>Cyklar i Zonen</th>
           </tr>
         </thead>
@@ -102,7 +102,7 @@ return (
       <p>Inga zoner hittades.</p>
     )}
 
-    <h3>Avvikande parkering (utanför accepterad zon)</h3>
+    <h3>Fri parkerade cyklar</h3>
     {(() => {
         const freeparkedBikes = bikes.filter(bike => !bike.startingzone);
 
@@ -130,7 +130,7 @@ return (
                                 <td>{bike._id}</td>
                                 <td>{statusText}</td>
                                 <td>{bike.battery}%</td>
-                                <td>{bike.position.latitude.toFixed(4)}, {bike.position.longitude.toFixed(4)}</td>
+                                <td>{bike.position.latitude.toFixed(4)}(Y), {bike.position.longitude.toFixed(4)}(X)</td>
                             </tr>
                         );
                     })}

@@ -35,7 +35,8 @@ function Login({ setToken }) {
 return (
   <div className="login-wrapper"> 
     <div className="login-container">
-      <h1>Logga in</h1>
+      <h1>Adminwebb</h1>
+      <h2>Logga in</h2>
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="email">E-post:</label>

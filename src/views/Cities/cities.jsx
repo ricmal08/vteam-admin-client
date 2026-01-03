@@ -27,8 +27,7 @@ function Cities() {
 
 return (
 
-  <div className="cities-container">
-
+  <div className="view-container">
     <h2 className="cities-title">Städer</h2>
       {cities.length > 0 ? (
           <table className={cities.dataTable}>

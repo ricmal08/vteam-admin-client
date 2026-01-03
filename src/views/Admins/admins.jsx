@@ -47,11 +47,10 @@ const handleDelete = async (adminEmail) => {
   };
 return (
 
-<div className="admins-container">
-
-      <h2 className="admins-title">Administratörer</h2>
+  <div className="view-container">
+    <h2 className="admins-title">Administratörer</h2>
       <Link to="/admins/create" className="button-link">
-              Lägg till
+            Lägg till
       </Link>
       {admins.length > 0 ? (
             <table className={admins.dataTable}>
@@ -70,9 +69,7 @@ return (
                     <td>{admin.id}</td>
                     <td>{admin.email}</td>
                     <td>
-                      <button onClick={() => handleDelete(admin.email)}>
-                        Ta bort
-                      </button>
+                      <button onClick={() => handleDelete(admin.email)}></button>
                     </td>
                   </tr>
                 ))}

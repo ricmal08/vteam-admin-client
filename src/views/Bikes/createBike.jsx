@@ -13,7 +13,6 @@ function CreateBike() {
   event.preventDefault();
   setError(null);
 
-  //skapar objekt som matchar jsonstrukturen enl.backendserverns krav.
   const newBikeData = {
     position: {
       latitude: parseFloat(latitude),

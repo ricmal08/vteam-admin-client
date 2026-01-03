@@ -1,5 +1,5 @@
 .city-container {
-   border: 1px solid #ccc;
+  border: 1px solid #ccc;
   border-radius: 8px;
   padding: 1.5rem;
   align-self: flex-start;
@@ -25,8 +25,8 @@
 }
 
 .dataTable th, .dataTable td {
-  padding: 0.75rem;
-  text-align: left;
+  width: 100%;
+  text-align: center;
   border-bottom: 1px solid #444;
 }
 

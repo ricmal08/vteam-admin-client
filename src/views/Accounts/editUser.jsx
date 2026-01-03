@@ -39,7 +39,7 @@ function EditUser() {
     fetchUserData();
   }, [userId]);
 
-   const handleChange = (e) => {
+    const handleChange = (e) => {
     const { name, value } = e.target;
     setUpdateUserData(currentState => ({
         ...currentState,

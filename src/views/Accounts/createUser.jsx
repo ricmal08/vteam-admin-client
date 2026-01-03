@@ -61,9 +61,8 @@ return (
             onChange={e => setPassword(e.target.value)}
             required
           />
+          <button type="submit" className="form-button">Spara</button>
         </div>
-
-        <button type="submit" className="form-button">Spara</button>
       </form>
   </div>
 );

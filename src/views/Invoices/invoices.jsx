@@ -43,9 +43,9 @@ function Invoices() {
       }
 
   };
- return (
+return (
 
-<div className="invoices-container">
+  <div className="view-container">
 
       <h2 className="invoices-title">Fakturor</h2>
       <Link to="/invoices/create" className="button-link">

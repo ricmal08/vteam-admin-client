@@ -36,7 +36,6 @@ import Map from './views/Map/map.jsx'
 
 
 function App() {
-  const [count, setCount] = useState(0)
   const [token, setToken] = useState(localStorage.getItem('accessToken'));
 
 return (
@@ -45,7 +44,7 @@ return (
 
       <Route path="/login" element={<Login setToken={setToken} />} />
 
-      <Route element={<AuthRoute token={token} />} />  
+      <Route element={<AuthRoute token={token} />}>  
         
         <Route path="/" element={<Userinterface />}>
 
@@ -77,7 +76,7 @@ return (
 
             {/* Map-endpoints */}
             <Route path="map" element={<Map/>} />
-
+      </Route>
 
 
       </Route>

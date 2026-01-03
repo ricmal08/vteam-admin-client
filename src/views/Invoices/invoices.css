@@ -13,3 +13,9 @@
   padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
 }
+
+.dataTable th, .dataTable td {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #444;
+}

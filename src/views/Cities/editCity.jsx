@@ -29,7 +29,7 @@ function EditCity() {
 
     const updatedCityData = {
         zones,
-     };
+    };
 
     try {
 

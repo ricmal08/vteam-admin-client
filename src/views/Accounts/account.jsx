@@ -28,17 +28,17 @@ function User() {
     fetchUser();
 }, [userId])
 
- if (!user) {
+  if (!user) {
     return <div>Hittar ingen kund med angivet kundnummer.</div>;
   }
- return (
+return (
 
-    <div className="user-container">
-        <h2 className="user-title">Översikt:</h2>
-          <Link to={`/users/${userId}/edit`}>
-          <button>Redigera användare</button>
+    <div className="form-container">
+      <h2>Översikt:</h2>
+          <Link to={`/users/${userId}/edit`} className="button-link">
+              Redigera
           </Link>
-          <div className="user-details">
+          <div className="form-group">
           <p><strong>Kundnummer:</strong> {user._id}</p>
           <p><strong>Förnamn:</strong> {user.firstName}</p>
           <p><strong>Efternamn:</strong> {user.lastName}</p>    

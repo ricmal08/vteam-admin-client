@@ -44,7 +44,7 @@ const handleDelete = async (userId) => {
 };
 return (
 
-  <div className="accounts-container">
+  <div className="view-container">
 
     <h2 className="accounts-title">Användare</h2>
         <Link to="/users/create" className="button-link">

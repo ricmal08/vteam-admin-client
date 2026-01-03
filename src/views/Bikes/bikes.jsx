@@ -55,7 +55,7 @@ const handleDelete = async (bikeId) => {
 const handleUnblock = async (bikeId) => {
     try {
         await apiRequest(`/api/bikes/${bikeId}/unblock`, {
-            method: 'PATCH',
+          method: 'PATCH',
         });
         fetchBikes();
     } catch (err) {
@@ -66,12 +66,12 @@ const handleUnblock = async (bikeId) => {
 
 return (
 
-<div className="bikes-container">
+<div className="view-container">
 
   <h2 className="bikes-title">Cyklar</h2>
-       <Link to="/bikes/create" className="button-link">
-                Lägg till
-       </Link>
+      <Link to="/bikes/create" className="button-link">
+            Lägg till
+      </Link>
       {bikes.length > 0 ? (
             <table className={bikes.dataTable}>
               <thead>
@@ -90,10 +90,12 @@ return (
             <tbody>
                 {bikes.map(bike => (
                   <tr key={bike._id}>
-                    <td><Link
+                    <td>
+                      <Link
                         to={`/bikes/${bike._id}`}>
                         {bike._id}
-                      </Link></td>
+                      </Link>
+                    </td>
                     <td>{bike.inUse ? 'Uthyrd' : 'Ledig'}</td>
                     <td>{bike.startingzone ? `Zon: ${bike.startingzone}` : 'Fri parkering'}</td>
                     <td>{bike.position.latitude.toFixed(4)}(Y),{bike.position.longitude.toFixed(4)}(X)</td>
