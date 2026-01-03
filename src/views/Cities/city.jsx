@@ -16,18 +16,18 @@ function City() {
 
     const fetchCity = async () => {
 
-    try {
+      try {
 
-      const data = await apiRequest(`/api/cities/${cityId}`);
-      setCity(data);
+        const data = await apiRequest(`/api/cities/${cityId}`);
+        setCity(data);
 
-      } catch (err) {
-        console.error("Ett fel inträffade vid fetch:", err);
+        } catch (err) {
+          console.error("Ett fel inträffade vid fetch:", err);
 
-      }
-  };
-  fetchCity();
-}, [cityId])
+        }
+    };
+    fetchCity();
+  }, [cityId])
 
   useEffect(() => {
       const fetchZones = async () => {
@@ -47,68 +47,96 @@ function City() {
   }, [cityId]);
 
   if (!city) {
-    return <div>Hittar ingen stad med angivet ID.</div>;
+    return <div>Hittar ingen stad med angivet Id.</div>;
   }
 
 return (
-  <div className="city-container">
-    <h2 className="user-title">{city.name}</h2>
-    <p><strong>Totalt antal cyklar i staden:</strong> {bikes.length}</p>
+  <div className="view-container">
+    <h2>{city.name}</h2>
+    <h4>Totalt antal cyklar i staden: {bikes.length} st</h4>
       
-    <h3>Laddstationer & Zoner</h3>
-      {zones.length > 0 ? (
-        <ul>
+    <h3>Zoner</h3>
+    {zones.length > 0 ? (
+      <table className="form-container">
+        <thead>
+          <tr>
+            <th>Namn</th>
+            <th>Cyklar i Zonen</th>
+          </tr>
+        </thead>
+        <tbody>
           {zones.map(zone => {
             const bikesInZone = bikes.filter(bike => bike.startingzone === zone._id);
-          
+            
             return (
-              <li key={zone._id}>
-                <strong>{zone.name}</strong> (Typ: {zone.typeOfZone}, Antal cyklar: {bikesInZone.length})
-                
-                {bikesInZone.length > 0 && (
-                  <ul>
-                    {bikesInZone.map(bike => (
-                      //Dispay bike info
-                      <li key={bike._id}>
-                        ID: {bike._id} | Batteri: {bike.battery}% | Status: {bike.inUse ? 'Uthyrd' : 'Ledig'}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            );
-        })}
-      </ul>
-    ) : (
-      <p>Inga zoner hittades för denna stad.</p>
-    )}
+              <tr key={zone._id}>
+                <td>
+                  <strong>{zone.name}</strong><br />
+                  <small>Typ: {zone.typeOfZone}</small>
+                </td>
 
-    <h3>Avvikande parkering (utanför accepterad zon)</h3>
-    {(() => {
-      const freeparkedBikes = bikes.filter(bike => !bike.startingzone);
-      if (freeparkedBikes.length === 0) {
-        return <p>Inga cyklar med avvikande parkering hittades.</p>;
-      }
-      return (
-        <ul>
-            {freeparkedBikes.map(bike => {
-            let statusText = bike.inUse ? 'Upptagen' : 'Ledig';
-            if (bike.blocked) statusText = 'Blockad';
-
-            const mapsLink = `https://www.google.com/maps?q=${bike.position.latitude},${bike.position.longitude}`;
-
-            return (
-              <li key={bike._id}>
-                Id: {bike._id} | Batteri: {bike.battery}% | Status: {statusText} |
-                Position: {bike.position.latitude.toFixed(4)}(Y), {bike.position.longitude.toFixed(4)}(X) |
-                <a href={mapsLink} target="_blank" rel="noopener noreferrer">
-                  Hitta
-                </a>
-              </li>
+                <td>
+                  {bikesInZone.length > 0 ? (
+                    <ul>
+                      {bikesInZone.map(bike => {
+                        let statusText = bike.inUse ? 'Uthyrd' : 'Ledig';
+                        if (bike.blocked) statusText = 'Blockerad';
+                        if (bike.charging) statusText = 'Laddar';
+                        return (
+                          <li key={bike._id}>
+                            Id: {bike._id} | Batteri: {bike.battery}% | Status: {statusText}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  ) : (
+                    <p>0 st</p>
+                  )}
+                </td>
+              </tr>
             );
           })}
-        </ul>
-      );
+        </tbody>
+      </table>
+    ) : (
+      <p>Inga zoner hittades.</p>
+    )}
+
+    <h3>Fri parkerade cyklar</h3>
+    {(() => {
+        const freeparkedBikes = bikes.filter(bike => !bike.startingzone);
+
+        if (freeparkedBikes.length === 0) {
+            return <p>Inga cyklar med avvikande parkering hittades.</p>;
+        }
+
+        return (
+            <table className="data-table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Status</th>
+                        <th>Batteri</th>
+                        <th>Position</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {freeparkedBikes.map(bike => {
+                        let statusText = bike.inUse ? 'Uthyrd' : 'Ledig';
+                        if (bike.blocked) statusText = 'Blockerad';
+
+                        return (
+                            <tr key={bike._id}>
+                                <td>{bike._id}</td>
+                                <td>{statusText}</td>
+                                <td>{bike.battery}%</td>
+                                <td>{bike.position.latitude.toFixed(4)}(Y), {bike.position.longitude.toFixed(4)}(X)</td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+        );
     })()}
   </div>
 );

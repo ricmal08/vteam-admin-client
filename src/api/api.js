@@ -1,17 +1,15 @@
 import { API_URL } from '../config';
 
 async function apiRequest(endpoint, options = {}) {
-  // hämtar accesstoken från localstorage
+
   const token = localStorage.getItem('accessToken');
 
 
-  //skapar headers
   const headers = {
     'Content-Type': 'application/json',
     ...options.headers,
   };
 
-  //om token finns, lägg till headern
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
   }

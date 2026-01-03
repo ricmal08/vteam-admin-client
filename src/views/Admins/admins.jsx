@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './admins.css';
 import { apiRequest } from '../../api/api.js';
@@ -49,11 +47,10 @@ const handleDelete = async (adminEmail) => {
   };
 return (
 
-<div className="admins-container">
-
-      <h2 className="admins-title">Administratörer</h2>
-      <Link to="/admins/create" className="admins-create">
-              + Lägg till
+  <div className="view-container">
+    <h2 className="admins-title">Administratörer</h2>
+      <Link to="/admins/create" className="button-link">
+            Lägg till
       </Link>
       {admins.length > 0 ? (
             <table className={admins.dataTable}>
@@ -72,9 +69,7 @@ return (
                     <td>{admin.id}</td>
                     <td>{admin.email}</td>
                     <td>
-                      <button onClick={() => handleDelete(admin.email)}>
-                        Ta bort
-                      </button>
+                      <button onClick={() => handleDelete(admin.email)}></button>
                     </td>
                   </tr>
                 ))}

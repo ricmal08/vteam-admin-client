@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './bikes.css';
 import { apiRequest } from '../../api/api.js';
@@ -57,7 +55,7 @@ const handleDelete = async (bikeId) => {
 const handleUnblock = async (bikeId) => {
     try {
         await apiRequest(`/api/bikes/${bikeId}/unblock`, {
-            method: 'PATCH',
+          method: 'PATCH',
         });
         fetchBikes();
     } catch (err) {
@@ -65,14 +63,15 @@ const handleUnblock = async (bikeId) => {
         console.error("Avblockering misslyckades:", err);
     }
 };
- return (
 
-<div className="bikes-container">
+return (
 
-      <h2 className="bikes-title">Cyklar</h2>
-       <Link to="/bikes/create" className="bikes-create">
-                + Lägg till
-       </Link>
+<div className="view-container">
+
+  <h2 className="bikes-title">Cyklar</h2>
+      <Link to="/bikes/create" className="button-link">
+            Lägg till
+      </Link>
       {bikes.length > 0 ? (
             <table className={bikes.dataTable}>
               <thead>
@@ -91,10 +90,12 @@ const handleUnblock = async (bikeId) => {
             <tbody>
                 {bikes.map(bike => (
                   <tr key={bike._id}>
-                    <td><Link
+                    <td>
+                      <Link
                         to={`/bikes/${bike._id}`}>
                         {bike._id}
-                      </Link></td>
+                      </Link>
+                    </td>
                     <td>{bike.inUse ? 'Uthyrd' : 'Ledig'}</td>
                     <td>{bike.startingzone ? `Zon: ${bike.startingzone}` : 'Fri parkering'}</td>
                     <td>{bike.position.latitude.toFixed(4)}(Y),{bike.position.longitude.toFixed(4)}(X)</td>

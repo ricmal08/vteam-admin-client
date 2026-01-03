@@ -19,8 +19,8 @@
 }
 
 .dataTable th, .dataTable td {
-  padding: 0.75rem;
-  text-align: left;
+  width: 100%;
+  text-align: center;
   border-bottom: 1px solid #444;
 }
 

@@ -32,10 +32,11 @@ function Login({ setToken }) {
     }
   };
 
-  return (
-    <div className="login-wrapper"> 
-      <div className="login-container">
-        <h1>Logga in</h1>
+return (
+  <div className="login-wrapper"> 
+    <div className="login-container">
+      <h1>Adminwebb</h1>
+      <h2>Logga in</h2>
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="email">E-post:</label>
@@ -47,6 +48,7 @@ function Login({ setToken }) {
               required
             />
           </div>
+
           <div>
             <label htmlFor="password">Lösenord:</label>
             <input
@@ -59,10 +61,9 @@ function Login({ setToken }) {
           </div>
           <button type="submit">Logga in</button>
         </form>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-      </div>
     </div>
-  );
+  </div>
+);
 }
 
 export default Login;

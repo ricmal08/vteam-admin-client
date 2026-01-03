@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiRequest } from '../../api/api.js';
-import './admin.css';
+
 
 function CreateAdmin() {
     const [email, setEmail] = useState('');
@@ -36,41 +36,45 @@ function CreateAdmin() {
 };
 
 return (
-    <div className="admin-container">
-        <h2 className="admin-title">Översikt:</h2>
-        <form onSubmit={handleSubmit}>
-            <h2>Skapa ny administratör</h2>
-                <div>
-                    <label htmlFor="email">E-post:</label>
-                    <input
-                        id="email"
-                        type="email"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                        required
-                    />
+    <div className="form-container">
+        <h2>Skapa administratör</h2>
+
+            <form onSubmit={handleSubmit} className="form-layout">
+            
+                <div className="form-group">
+                    <label htmlFor="email">E-post:
+                        <input
+                            id="email"
+                            type="email"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                            required
+                        />
+                    </label>
                 </div>
-                <div>
-                    <label htmlFor="role">Roll:</label>
-                    <input
-                        id="role"
-                        type="text"
-                        value={role}
-                        onChange={e => setRole(e.target.value)}
-                        required
-                    />
+                <div className="form-group">
+                    <label htmlFor="role">Roll:
+                        <input
+                            id="role"
+                            type="text"
+                            value={role}
+                            onChange={e => setRole(e.target.value)}
+                            required
+                        />
+                    </label>
                 </div>
-                <div>
-                    <label htmlFor="password">Lösenord:</label>
-                    <input
-                        id="password"
-                        type="text"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        required
-                    />
+                <div className="form-group">
+                    <label htmlFor="password">Lösenord:
+                        <input
+                            id="password"
+                            type="text"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            erquired
+                        />
+                    </label>
                 </div>
-                <button type="submit">Spara</button>
+                <button type="submit" className="form-button">Spara</button>
         </form>
     </div>
 );

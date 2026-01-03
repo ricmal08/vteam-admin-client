@@ -4,6 +4,7 @@
   border-radius: 8px;
   padding: 1.5rem;
   background-color: #2d2d2d;
+  align-self: flex-start;
 }
 
 .invoices-title {
@@ -11,4 +12,10 @@
   border-bottom: 2px solid #444;
   padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
+}
+
+.dataTable th, .dataTable td {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #444;
 }

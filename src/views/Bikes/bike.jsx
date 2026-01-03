@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { apiRequest } from '../../api/api.js';
 import { Link } from 'react-router-dom';
-import './bike.css';
+import '../../forms/forms.css';
 
 function EditBike() { 
 
@@ -73,33 +73,35 @@ function EditBike() {
 
   
 
-   if (isLoadingBikes || isLoadingZones) {
+  if (isLoadingBikes || isLoadingZones) {
     return <p>Laddar data...</p>;
   }
 
-  return (
-    <div className="bikes-container">
-      <h2 className="bike-title">Översikt:</h2>
+return (
+  <div className="form-container">
+    <h2>Översikt</h2>
 
-        <div className="bike-details">
-        <h3>Status & Information</h3>
-        <p><strong>Status:</strong></p>
-        <p><strong>Batteri:</strong> {bike.battery}%</p>
-        <p><strong>Nuvarande Zon:</strong> {bike.startingzone}</p>
-        <p>
-            <strong>Position:</strong> {bike.position.latitude.toFixed(4)} (Y), {bike.position.longitude.toFixed(4)} (X) 
-         </p>
-        <p><strong>Total distans:</strong> {bike.distance} meter</p>
-      </div>
-        <form onSubmit={handleSubmit}>
-        <div>
+      <div className="form-group">
+      <h3>Status & Information</h3>
+      <p><strong>Status:</strong></p>
+      <p><strong>Batteri:</strong> {bike.battery}%</p>
+      <p><strong>Nuvarande Zon:</strong> {bike.startingzone}</p>
+      <p>
+        <strong>Position:</strong> {bike.position.latitude.toFixed(4)} (Y), {bike.position.longitude.toFixed(4)} (X) 
+      </p>
+      <p><strong>Total distans:</strong> {bike.distance} meter</p>
+    </div>
+
+      <form onSubmit={handleSubmit} className="form-layout">
+
+        <div className="form-group">
           <label htmlFor="zone-select">Flytta cykel till en laddzon:</label>
-           <select 
+          <select 
             id="zone-select" 
             value={selectedZone} 
             onChange={e => setSelectedZone(e.target.value)}
           >
-             <option value="">Ange zon</option>
+            <option value="">Ange zon</option>
             {zones.filter(zone => zone.typeOfZone === 'parking').map(zone => (
                 <option key={zone._id} value={zone._id}>
                     {zone.name}
@@ -107,7 +109,7 @@ function EditBike() {
             ))}
             </select>
         </div>
-          <button type="submit">Spara</button>
+          <button type="submit" className="form-button">Spara</button>
         </form>
     </div>
   );

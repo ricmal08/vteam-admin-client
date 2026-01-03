@@ -16,7 +16,7 @@ return (
     <nav className="nav-menu">
       <h2 className="nav-title">Adminwebb</h2>
           <button onClick={handleLogout} className="logout-button">Logga ut</button>
-      <h3> Meny: </h3>
+      <h4> Meny </h4>
 
     {!currentUser && (
     <RouterLink className="nav-link" to="/login">Logga in</RouterLink>
@@ -29,7 +29,7 @@ return (
       <RouterLink className="nav-link" to="/bikes">Cyklar</RouterLink>
       <RouterLink className="nav-link" to="/cities">Städer</RouterLink>
       <RouterLink className="nav-link" to="/invoices">Fakturor</RouterLink>
-      <RouterLink className="nav-link" to="/admins">Administratörer</RouterLink>
+      <RouterLink className="nav-link" to="/admins">Admins</RouterLink>
       </>
       )}
     </nav>
