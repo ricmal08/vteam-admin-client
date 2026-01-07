@@ -30,6 +30,7 @@ return (
       <RouterLink className="nav-link" to="/cities">Städer</RouterLink>
       <RouterLink className="nav-link" to="/invoices">Fakturor</RouterLink>
       <RouterLink className="nav-link" to="/admins">Admins</RouterLink>
+      <RouterLink className="nav-link" to="/simulation">Simulering</RouterLink>
       </>
       )}
     </nav>

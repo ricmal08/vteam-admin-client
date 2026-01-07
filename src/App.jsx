@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useState } from 'react'
+import { useState} from 'react'
 import './App.css'
 import 'leaflet/dist/leaflet.css';
 
@@ -30,6 +30,7 @@ import City from './views/Cities/city.jsx';
 import EditCity from './views/Cities/editCity.jsx';
 
 import Map from './views/Map/map.jsx'
+import Simulation from './views/Simulation/simulation.jsx';
 
 
 
@@ -76,6 +77,10 @@ return (
 
             {/* Map-endpoints */}
             <Route path="map" element={<Map/>} />
+
+            {/*Simulation-endpoint*/}
+            <Route path="simulation" element={<Simulation/>} />
+
       </Route>
 
 
