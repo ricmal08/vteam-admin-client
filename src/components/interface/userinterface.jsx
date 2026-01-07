@@ -2,12 +2,13 @@ import React from 'react';
 import { Link as RouterLink, Outlet, useNavigate } from 'react-router-dom';
 import './userinterface.css'; 
 
-function Userinterface(currentUser) {
+function Userinterface({ token, setToken }) {
 
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem('accessToken');
+    setToken(null);    
     navigate('/login');
   };
 
@@ -18,11 +19,11 @@ return (
           <button onClick={handleLogout} className="logout-button">Logga ut</button>
       <h4> Meny </h4>
 
-    {!currentUser && (
+    {!token && (
     <RouterLink className="nav-link" to="/login">Logga in</RouterLink>
     )}
 
-    {currentUser && (
+    {token && (
       <>
       <RouterLink className="nav-link" to="/map">Karta</RouterLink>
       <RouterLink className="nav-link" to="/users">Användare</RouterLink>

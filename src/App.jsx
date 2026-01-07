@@ -46,7 +46,7 @@ return (
 
       <Route element={<AuthRoute token={token} />}>  
         
-        <Route path="/" element={<Userinterface />}>
+        <Route path="/" element={<Userinterface token={token} setToken={setToken} />}>
 
             {/* Admins-endpoints */}
             <Route path="admins" element={<Admins />} />
