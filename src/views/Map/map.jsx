@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Polygon } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -30,57 +30,85 @@ function Map() {
   const [bikesError, setBikesError] = useState(null);
   const [zonesError, setZonesError] = useState(null);
 
-  useEffect(() => {
-    const fetchBikes = async () => {
-        try {
-        const bikesData = await apiRequest('/api/bikes');
-        setBikes(bikesData);
-        console.log('cykeldata:', bikesData)
-        } catch (err) {
-        setBikesError("Kunde inte hämta cykeldata.");
-        console.error("Fel vid hämtning av cyklar för kartan:", err);
-        } finally {
-        setIsLoadingBikes(false);
-      }
-    };
-    fetchBikes();
-  }, []);
+  const bikeFetchIntervalRef = useRef(null); 
 
+  const fetchBikes = async () => {
+    try {
+      const bikesData = await apiRequest('/api/bikes');
+      setBikes(bikesData);
+    } catch (err) {
+      setBikesError("Kunde inte hämta cykeldata.");
+      console.error("Fel vid hämtning av cyklar för kartan:", err);
+    } finally {
+      setIsLoadingBikes(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchBikes();
+  }, []); 
+  
   useEffect(() => {
     const fetchZones = async () => {
-        try {
-
-          const zonesData = await apiRequest('/api/zones');
-          setZones(zonesData);
-          console.log('zondata:', zonesData)
-        } catch (err) {
-          
-            setZonesError("Kunde inte hämta zondata.");
-            console.error("Fel vid hämtning av zoner för kartan:", err);
-        } finally {
-            setIsLoadingZones(false);
-        }
+      try {
+        const zonesData = await apiRequest('/api/zones');
+        setZones(zonesData);
+      } catch (err) {
+        setZonesError("Kunde inte hämta zondata.");
+        console.error("Fel vid hämtning av zoner för kartan:", err);
+      } finally {
+        setIsLoadingZones(false);
+      }
     };
     fetchZones();
   }, []);
 
-  //Guard
+  const startLiveStream = () => {
+
+    if (bikeFetchIntervalRef.current) return; 
+    
+    bikeFetchIntervalRef.current = setInterval(fetchBikes, 5000);
+  };
+
+  const stopLiveStream = () => {
+
+    clearInterval(bikeFetchIntervalRef.current);
+    bikeFetchIntervalRef.current = null;
+  };
+
+  useEffect(() => {
+
+    return () => {
+      if (bikeFetchIntervalRef.current) {
+        clearInterval(bikeFetchIntervalRef.current);
+      }
+    };
+  }, []);
+
+
   if (isLoadingBikes || isLoadingZones) {
-    return <p>Laddar data...</p>;
+    return <p>Laddar data.</p>;
   }
 
-  return (
+return (
 
-    <div className="map-container">
-        <h2 className="map-title">Kartvy</h2>
-      {bikesError && <p style={{ color: 'red', textAlign: 'center' }}>{bikesError}</p>}
-      {zonesError && <p style={{ color: 'red', textAlign: 'center' }}>{zonesError}</p>}
+  <div className="map-container">
+    <h2 className="map-title">Karta</h2>
 
-    <MapContainer center={initialPosition} zoom={13} >
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      />
+      <div className="form-container">
+        <div className="form-group">
+          <button onClick={startLiveStream} className="form-button">Starta live-sändning</button>
+        </div>
+        <div className="form-group">
+          <button onClick={stopLiveStream}className="form-button">Stoppa live-sändning</button>
+        </div>
+      </div>
+
+      <MapContainer center={initialPosition} zoom={13} >
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
 
 
         {zones.map(zone => (
@@ -111,9 +139,9 @@ function Map() {
             </Popup>
             </Marker>
         ))}
-        </MapContainer>
-    </div>
-  );
+      </MapContainer>
+  </div>
+);
 }
 
 export default Map;
