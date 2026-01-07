@@ -8,14 +8,16 @@ function Simulation() {
     try {
       const response = await apiRequest('/api/scripts/start', { method: 'GET' });
       setMessage(response.message);
-    } catch (err) { setMessage(`Fel: ${err.message}`); }
+    } catch (err) { 
+      setMessage(`${err.message}`); }
   };
 
   const handleStop = async () => {
     try {
       const response = await apiRequest('/api/scripts/stop', { method: 'GET' });
       setMessage(response.message);
-    } catch (err) { setMessage(`Fel: ${err.message}`); }
+    } catch (err) { 
+      setMessage(`${err.message}`); }
   };
 
   const handleReset = async () => {
@@ -23,7 +25,8 @@ function Simulation() {
       try {
         const response = await apiRequest('/api/simulation/reset', { method: 'POST' });
         setMessage(response.message);
-      } catch (err) { setMessage(`Fel: ${err.message}`); }
+      } catch (err) 
+        { setMessage(`${err.message}`); }
     }
   };
 
