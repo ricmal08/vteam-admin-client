@@ -79,7 +79,6 @@ return (
                 <tr>
                   <th>Id</th>
                   <th>Status</th>
-                  <th>Plats</th>
                   <th>Position</th>
                   <th>Batteri</th>
                   <th>Laddning</th>
@@ -98,7 +97,6 @@ return (
                       </Link>
                     </td>
                     <td>{bike.inUse ? 'Uthyrd' : 'Ledig'}</td>
-                    <td>{bike.startingzone ? `Zon: ${bike.startingzone}` : 'Fri parkering'}</td>
                     <td>{bike.position.latitude.toFixed(4)}(Y),{bike.position.longitude.toFixed(4)}(X)</td>
                     <td>{bike.battery}%</td>
                     <td>{bike.charging ? 'Laddar': ''}</td>
