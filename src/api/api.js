@@ -15,7 +15,6 @@ async function apiRequest(endpoint, options = {}) {
   }
 
   try {
-    //fetchanrop
     const response = await fetch(`${API_URL}${endpoint}`, {
       ...options,
       headers,
@@ -27,8 +26,8 @@ async function apiRequest(endpoint, options = {}) {
       const errorMessage = errorData.message || `Nätverksfel, status: ${response.status}`;
 
       if (response.status === 401) {
-        localStorage.removeItem('accessToken'); // Ta bort den felaktig token ur localstorage
-        window.location.href = '/login'; // Tvinga omdirigering.
+        localStorage.removeItem('accessToken');
+        window.location.href = '/login';
       }
       throw new Error(`Nätverksfel, status: ${errorMessage}`);
     }
