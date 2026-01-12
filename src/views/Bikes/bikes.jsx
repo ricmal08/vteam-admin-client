@@ -11,6 +11,7 @@ function Bikes() {
     try {
       const data = await apiRequest('/api/bikes');
       setBikes(data);
+      console.log('hämtar cykeldata:', data)
     } catch (err) {
       console.error("Ett fel inträffade vid hämtning:", err);
       setError("Kunde inte hämta cyklar.");
