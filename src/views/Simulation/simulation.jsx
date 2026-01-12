@@ -20,16 +20,6 @@ function Simulation() {
       setMessage(`${err.message}`); }
   };
 
-  const handleReset = async () => {
-    if (window.confirm("Återställa hela databasen.")) {
-      try {
-        const response = await apiRequest('/api/simulation/reset', { method: 'POST' });
-        setMessage(response.message);
-      } catch (err) 
-        { setMessage(`${err.message}`); }
-    }
-  };
-
 return (
   <div className="view-container">
     <div className="form-container">
@@ -48,13 +38,6 @@ return (
     className="form-button" 
     >
     Stopp
-    </button>
-
-    <button 
-    onClick={handleReset} 
-    className="form-button" 
-    >
-    Återställ
     </button>
     </div>
 
