@@ -1,31 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'; 
 import './invoices.css';
-import { API_URL } from "../../config.js"
 import { apiRequest } from '../../api/api.js';
 
 function Invoices() {
   const [invoices, setInvoices] = useState([]);
   const [error, setError] = useState(null);
 
-     useEffect(() => {
-      const fetchInvoices = async () => {
+    useEffect(() => {
+    const fetchInvoices = async () => {
 
-      try {
+    try {
 
-          const data = await apiRequest('/api/invoices');
-          setInvoices(data);
-        } catch (err) {
-          console.error("Ett fel inträffade vid fetch:", err);
-         
-        }
-    };
-    fetchInvoices();
+        const data = await apiRequest('/api/invoices');
+        setInvoices(data);
+        //console.log('fakturadata:', data)
+      } catch (err) {
+        console.error("Fel vid hämtning av fakturor:", err);
+        
+      }
+  };
+  fetchInvoices();
 }, [])
 
- const handleDelete = async (invoiceId) => {
+  const handleDelete = async (invoiceId) => {
 
       try {
 
