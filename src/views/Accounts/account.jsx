@@ -41,9 +41,9 @@ return (
           <p><strong>Kundnummer:</strong> {user._id}</p>
           <p><strong>Förnamn:</strong> {user.firstName}</p>
           <p><strong>Efternamn:</strong> {user.lastName}</p>    
-          <p><strong>Adress:</strong> {user.city}</p>    
-          <p><strong>Postnummer:</strong> {user.street}</p>    
-          <p><strong>Stad:</strong> {user.zipCode}</p>
+          <p><strong>Stad:</strong> {user.city}</p>    
+          <p><strong>Adress:</strong> {user.street}</p>    
+          <p><strong>Postnummer:</strong> {user.zipCode}</p>
           <p><strong>E-post:</strong> {user.email}</p>       
           </div>
     </div>
