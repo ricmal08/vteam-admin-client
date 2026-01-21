@@ -1,0 +1,56 @@
+.invoice-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1.5rem;
+  align-self: flex-start;
+}
+
+.invoice-title {
+  margin-top: 0;
+  border-bottom: 2px solid #444;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  color: black;
+}
+.invoice-group {
+  background-color: #faf7f7;
+  width: 80%;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.invoice-container p{
+  color: black;
+}
+
+.invoice-details {
+
+  text-align: left;
+  margin-top: 2.5rem;
+}
+
+.invoice-details p {
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+.invoice-details td {
+  color: black;
+  margin-top: 5rem;
+}
+
+.company-info {
+  border-top: 2px solid #444;
+  margin-top: 5rem;
+  border-bottom: 2px solid #444;
+}
+
+.company-info h4 {
+  color: black;
+}

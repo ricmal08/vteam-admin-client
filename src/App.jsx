@@ -1,35 +1,93 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useState} from 'react'
 import './App.css'
+import 'leaflet/dist/leaflet.css';
+
+import AuthRoute from './components/interface/auth/authRoute.jsx';
+import Login from './views/Login/login.jsx';
+import Userinterface from './components/interface/userinterface.jsx';
+
+import Accounts from './views/Accounts/accounts.jsx';
+import User from './views/Accounts/account.jsx';
+import CreateUser from './views/Accounts/createUser.jsx';
+import EditUser from './views/Accounts/editUser.jsx';
+
+import Bikes from './views/Bikes/bikes.jsx';
+import CreateBike from './views/Bikes/createBike.jsx';
+import Bike from './views/Bikes/bike.jsx';
+
+import Admins from './views/Admins/admins.jsx';
+import CreateAdmin from './views/Admins/createAdmin.jsx';
+
+import Invoices from './views/Invoices/invoices.jsx';
+import Invoice from './views/Invoices/invoice.jsx';
+import CreateInvoice from './views/Invoices/createInvoice.jsx';
+
+import Cities from './views/Cities/cities.jsx'
+import CreateCity from './views/Cities/createCity.jsx';
+import City from './views/Cities/city.jsx';
+import EditCity from './views/Cities/editCity.jsx';
+
+import Map from './views/Map/map.jsx'
+import Simulation from './views/Simulation/simulation.jsx';
+
+
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [token, setToken] = useState(localStorage.getItem('accessToken'));
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+return (
+  <BrowserRouter>
+    <Routes>
+
+      <Route path="/login" element={<Login setToken={setToken} />} />
+
+      <Route element={<AuthRoute token={token} />}>  
+        
+        <Route path="/" element={<Userinterface token={token} setToken={setToken} />}>
+
+            {/* Admins-endpoints */}
+            <Route path="admins" element={<Admins />} />
+            <Route path="admins/create" element={<CreateAdmin/>} />
+
+            {/* Bikes-endpoints */}
+            <Route path="bikes" element={<Bikes/>} />
+            <Route path="bikes/create" element={<CreateBike/>} />
+            <Route path="bikes/:bikeId" element={<Bike />} />
+
+            {/* Invoices-endpoints */}
+            <Route path="invoices" element={<Invoices/>} />
+            <Route path="invoices/create" element={<CreateInvoice/>} />
+            <Route path="invoices/:invoiceId" element={<Invoice />} />
+            
+            {/* Users-endpoints */}
+            <Route path="users" element={<Accounts/>} />
+            <Route path="users/create" element={<CreateUser/>} />
+            <Route path="users/:userId" element={<User />} />
+            <Route path="users/:userId/edit" element={<EditUser />} />
+
+            {/* Cities-endpoints */}
+            <Route path="cities" element={<Cities/>} />
+            <Route path="cities/create" element={<CreateCity/>} />
+            <Route path="cities/:cityId" element={<City/>} />
+            <Route path="cities/:cityId/edit" element={<EditCity />} />
+
+            {/* Map-endpoints */}
+            <Route path="map" element={<Map/>} />
+
+            {/*Simulation-endpoint*/}
+            <Route path="simulation" element={<Simulation/>} />
+
+      </Route>
+
+
+      </Route>
+    </Routes>
+  </BrowserRouter>
+)
 }
 
 export default App
