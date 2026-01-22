@@ -11,7 +11,6 @@ function CreateInvoice() {
 const handleSubmit = async (event) => {
   event.preventDefault();
 
-  //har hårdkodat in startTime, startPosition och endPosition för att formatet ska matcha det backendservern väntar sig.
   const newInvoiceData = { 
       userId: userId,
       startTime: new Date(Date.now() - 10 * 60000).toISOString(),

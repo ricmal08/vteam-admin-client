@@ -98,7 +98,7 @@ return (
                     </td>
                     <td>{bike.inUse ? 'Uthyrd' : 'Ledig'}</td>
                     <td>{bike.position.latitude.toFixed(4)}(Y),{bike.position.longitude.toFixed(4)}(X)</td>
-                    <td>{bike.battery}%</td>
+                    <td>{Math.round(bike.battery)}%</td>
                     <td>{bike.charging ? 'Laddar': ''}</td>
                     <td>{bike.blocked ? 'Blockad': ''}</td>
                     <td> {bike.blocked 
