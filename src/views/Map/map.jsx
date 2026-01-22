@@ -114,7 +114,6 @@ return (
         {zones.map(zone => (
             <Polygon
             key={zone._id}
-            //Switch order of coordinates to map with Geojson (from[lon, lat] till [lat, lon])
             positions={zone.area.coordinates[0].map(coord => [coord[1], coord[0]])}
 
             pathOptions={zoneOptions[zone.typeOfZone] || zoneOptions.default}
@@ -134,8 +133,10 @@ return (
             >
             <Popup>
                 <strong>Id:</strong> {bike._id} <br />
-                <strong>Batteri:</strong> {bike.battery}% <br />
+                <strong>Batteri:</strong> {Math.round(bike.battery)}% <br />
                 <strong>Status:</strong> {bike.inUse ? 'Uthyrd' : 'Ledig'} <br />
+                <strong>Laddar:</strong> {bike.charging ? 'Laddning pågår': ''} <br />
+                <strong>Blockerad:</strong> {bike.blocked ? 'Ur service': ''} <br />
             </Popup>
             </Marker>
         ))}

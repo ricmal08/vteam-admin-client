@@ -33,7 +33,6 @@ function City() {
       const fetchZones = async () => {
           const zonesData = await apiRequest(`/api/cities/${cityId}/zones`);
           setZones(zonesData);
-          //console.log('zondata:', zonesData)
       };
       fetchZones();
   }, [cityId]);

@@ -82,9 +82,8 @@ return (
 
       <div className="form-group">
       <h3>Status & Information</h3>
-      <p><strong>Status:</strong></p>
-      <p><strong>Batteri:</strong> {bike.battery}%</p>
-      <p><strong>Nuvarande Zon:</strong> {bike.startingzone}</p>
+      <p><strong>Status:</strong> {bike.inUse ? 'Uthyrd' : 'Ledig'}</p>
+      <p><strong>Batteri:</strong> {Math.round(bike.battery)}%</p>
       <p>
         <strong>Position:</strong> {bike.position.latitude.toFixed(4)} (Y), {bike.position.longitude.toFixed(4)} (X) 
       </p>
