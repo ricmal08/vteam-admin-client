@@ -96,7 +96,7 @@ return (
                         <tr key={bike._id}>
                             <td>{bike._id}</td>
                             <td>{statusText}</td>
-                            <td>{bike.battery}%</td>
+                            <td>{Math.round(bike.battery)}%</td>
                             <td>
                                 {bike.position.latitude.toFixed(4)}(Y), {bike.position.longitude.toFixed(4)}(X)
                             </td>
